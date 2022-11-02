@@ -392,10 +392,7 @@
 </head>
 <body style="">
 <div class="text-center mb-20">
-    <h1 class="sm:text-3xl text-3xl font-medium text-center title-font  mb-4 " style="color: wheat;">Puntastic Hub</h1>
-    <p class="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto" style="color: wheat">
-        Click on a chat and then key any random number between 1 and 100.
-    </p>
+    <h1 class="sm:text-3xl text-3xl font-medium text-center title-font  mb-2" style="color: wheat;">Puntastic Hub</h1>
 </div>
 <div id="app" class="max-w-6xl mx-auto sm:px-6 lg:px-8">
 </div>

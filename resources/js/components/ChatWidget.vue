@@ -1,5 +1,7 @@
 <template>
     <chat-window
+        :current-user-id="'1234'"
+        :text-messages="textMessages"
         :height="'500px'"
         :theme="'dark'"
         :show-audio="false"
@@ -12,7 +14,9 @@
         :loading-rooms="loadingRooms"
         :messages="messages"
         :messages-loaded="messagesLoaded"
-    />
+        @fetch-messages="fetchMessages"
+    >
+    </chat-window>
 </template>
 
 <script>
@@ -57,6 +61,21 @@ export default {
 
 
             },
+            messages:[ {
+                _id: '7890',
+                indexId: 12092,
+                content: 'Message 1',
+                senderId: '4321',
+                username: 'John Doe',
+                avatar: '/images/cooking.png',
+                date: '13 November',
+                timestamp: '10:20',
+                system: false,
+                saved: true,
+                distributed: true,
+                seen: true,
+                disableActions: false,
+                disableReactions: false,}],
             rooms: [
                 {
                     roomId: '1',
@@ -65,7 +84,16 @@ export default {
                     users: [
                         {_id: '1234', username: 'John Doe'},
                         {_id: '4321', username: 'John Snow'}
-                    ]
+                    ],
+                    lastMessage: {
+                        _id: '1234',
+                        content: 'Pun Intended!',
+                        senderId: '1234',
+                        username: 'John Doe',
+                        distributed: true,
+                        seen: true,
+
+                    },
                 },
 
                 {
@@ -75,7 +103,15 @@ export default {
                     users: [
                         {_id: '1234', username: 'John Doe'},
                         {_id: '4321', username: 'John Snow'}
-                    ]
+                    ],
+                    lastMessage: {
+                        _id: '1234',
+                        content: 'Facts are Fun',
+                        senderId: '1234',
+                        username: 'John Doe',
+                        distributed: true,
+                        seen: true,
+                    },
                 },
 
                 {
@@ -85,7 +121,15 @@ export default {
                     users: [
                         {_id: '1234', username: 'John Doe'},
                         {_id: '4321', username: 'John Snow'}
-                    ]
+                    ],
+                    lastMessage: {
+                        _id: '1234',
+                        content: "Can't Sleep?",
+                        senderId: '1234',
+                        username: 'John Doe',
+                        distributed: true,
+                        seen: true,
+                    },
                 },
 
                 {
@@ -95,7 +139,15 @@ export default {
                     users: [
                         {_id: '1234', username: 'John Doe'},
                         {_id: '4321', username: 'John Snow'}
-                    ]
+                    ],
+                    lastMessage: {
+                        _id: '1234',
+                        content: 'Makes Sense',
+                        senderId: '1234',
+                        username: 'John Doe',
+                        distributed: true,
+                        seen: true,
+                    },
                 },
 
 
@@ -107,11 +159,63 @@ export default {
             roomsLoaded: true,
             messagesLoaded: false,
             loadingRooms: false,
-            messages: [],
+            textMessages:{
+            TYPE_MESSAGE: 'Input random number between 1 and 100',
+            }
         }
     },
 
-    methods: {}
+    methods: {
+        fetchMessages({ room, options = {} }){
+            const introductoryMessages = [
+            {
+                _id: '7890',
+                indexId: 12092,
+                content: 'Pick a number between 1 and 100 and i will share a pun with you',
+                senderId: '4321',
+                username: 'John Doe',
+                avatar: '/images/cooking.png',
+                date: '13 November',
+                timestamp: '10:20',
+                system: false,
+                roomId: '1',
+                saved: true,
+                distributed: true,
+                seen: true,
+                disableActions: false,
+                disableReactions: false,
+            },
+                {
+                    _id: '78913',
+                    indexId: 120922,
+                    content: 'Pick a number between 1 and 100 and i will share a random fun fact with you',
+                    senderId: '4321',
+                    username: 'John Doe',
+                    avatar: '/images/cooking.png',
+                    date: '13 November',
+                    timestamp: '10:20',
+                    system: false,
+                    roomId: '2',
+                    saved: true,
+                    distributed: true,
+                    seen: true,
+                    disableActions: false,
+                    disableReactions: false,
+                },
+
+
+            ]
+
+            this.messages = introductoryMessages.filter(x=>x.roomId===room.roomId)
+        }
+
+    },
+
+
+    mounted() {
+
+
+    }
 }
 </script>
 
