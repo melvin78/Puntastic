@@ -22,6 +22,7 @@
 <script>
 import ChatWindow from 'vue-advanced-chat'
 import 'vue-advanced-chat/dist/vue-advanced-chat.css'
+import {parseTimestamp} from "@/utils/dates";
 
 
 export default {
@@ -61,21 +62,7 @@ export default {
 
 
             },
-            messages:[ {
-                _id: '7890',
-                indexId: 12092,
-                content: 'Message 1',
-                senderId: '4321',
-                username: 'John Doe',
-                avatar: '/images/cooking.png',
-                date: '13 November',
-                timestamp: '10:20',
-                system: false,
-                saved: true,
-                distributed: true,
-                seen: true,
-                disableActions: false,
-                disableReactions: false,}],
+            messages:[ ],
             rooms: [
                 {
                     roomId: '1',
@@ -92,6 +79,8 @@ export default {
                         username: 'John Doe',
                         distributed: true,
                         seen: true,
+                        date: parseTimestamp(new Date(), 'DD MMMM YYYY'),
+                        timestamp: parseTimestamp(new Date(), 'HH:mm'),
 
                     },
                 },
@@ -111,6 +100,8 @@ export default {
                         username: 'John Doe',
                         distributed: true,
                         seen: true,
+                        date: parseTimestamp(new Date(), 'DD MMMM YYYY'),
+                        timestamp: parseTimestamp(new Date(), 'HH:mm'),
                     },
                 },
 
@@ -129,6 +120,8 @@ export default {
                         username: 'John Doe',
                         distributed: true,
                         seen: true,
+                        date: parseTimestamp(new Date(), 'DD MMMM YYYY'),
+                        timestamp: parseTimestamp(new Date(), 'HH:mm'),
                     },
                 },
 
@@ -147,6 +140,8 @@ export default {
                         username: 'John Doe',
                         distributed: true,
                         seen: true,
+                        date: parseTimestamp(new Date(), 'DD MMMM YYYY'),
+                        timestamp: parseTimestamp(new Date(), 'HH:mm'),
                     },
                 },
 
@@ -161,7 +156,9 @@ export default {
             loadingRooms: false,
             textMessages:{
             TYPE_MESSAGE: 'Input random number between 1 and 100',
-            }
+            },
+            options :{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
+
         }
     },
 
@@ -171,12 +168,12 @@ export default {
             {
                 _id: '7890',
                 indexId: 12092,
-                content: 'Pick a number between 1 and 100 and i will share a pun with you',
+                content: 'Pun absolutely intended 😝....* badam tiss * 🥁. Pick a number between 1 and 50',
                 senderId: '4321',
                 username: 'John Doe',
                 avatar: '/images/cooking.png',
-                date: '13 November',
-                timestamp: '10:20',
+                date: parseTimestamp(new Date(), 'DD MMMM YYYY'),
+                timestamp: parseTimestamp(new Date(), 'HH:mm'),
                 system: false,
                 roomId: '1',
                 saved: true,
@@ -188,12 +185,12 @@ export default {
                 {
                     _id: '78913',
                     indexId: 120922,
-                    content: 'Pick a number between 1 and 100 and i will share a random fun fact with you',
+                    content: 'Some cool fun facts 💡😀😲 awaits you. Input a number between 1 and 100 to begin. 🙃',
                     senderId: '4321',
                     username: 'John Doe',
-                    avatar: '/images/cooking.png',
-                    date: '13 November',
-                    timestamp: '10:20',
+                    avatar: '/images/fun-fact.png',
+                    date: parseTimestamp(new Date(), 'DD MMMM YYYY'),
+                    timestamp: parseTimestamp(new Date(), 'HH:mm'),
                     system: false,
                     roomId: '2',
                     saved: true,
@@ -203,10 +200,49 @@ export default {
                     disableReactions: false,
                 },
 
+                {
+                    _id: '78113',
+                    indexId: 1230922,
+                    content: "Jokes So bad they shouldn't be seeing the light of day 🙂😁🤣. Input a number between 1 and 30 to see them",
+                    senderId: '4321',
+                    username: 'John Doe',
+                    avatar: '/images/joking.png',
+                    date: parseTimestamp(new Date(), 'DD MMMM YYYY'),
+                    timestamp: parseTimestamp(new Date(), 'HH:mm'),
+                    system: false,
+                    roomId: '3',
+                    saved: true,
+                    distributed: true,
+                    seen: true,
+                    disableActions: false,
+                    disableReactions: false,
+                },
+
+                {
+                    _id: '78213',
+                    indexId: 12312,
+                    content: "Motivational,inspirational,famous quotes to brighten your day.🧘‍♀️🧘‍♂💆‍♂️💆‍♀️",
+                    senderId: '4321',
+                    username: 'John Doe',
+                    avatar: '/images/quote.png',
+                    date: parseTimestamp(new Date(), 'DD MMMM YYYY'),
+                    timestamp: parseTimestamp(new Date(), 'HH:mm'),
+                    system: false,
+                    roomId: '4',
+                    saved: true,
+                    distributed: true,
+                    seen: true,
+                    disableActions: false,
+                    disableReactions: false,
+                },
+
+
 
             ]
 
             this.messages = introductoryMessages.filter(x=>x.roomId===room.roomId)
+            this.messagesLoaded=true
+
         }
 
     },
