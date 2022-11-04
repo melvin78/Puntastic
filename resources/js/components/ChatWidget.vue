@@ -10,10 +10,12 @@
         :show-add-room="false"
         :styles="styles"
         :rooms="rooms"
+        :message-actions="[]"
         :rooms-loaded="roomsLoaded"
         :loading-rooms="loadingRooms"
         :messages="messages"
         :messages-loaded="messagesLoaded"
+        @send-message-reaction="sendMessageReaction($event)"
         @fetch-messages="fetchMessages"
     >
     </chat-window>
@@ -21,6 +23,7 @@
 
 <script>
 import ChatWindow from 'vue-advanced-chat'
+import { reactive, toRaw } from 'vue'
 import 'vue-advanced-chat/dist/vue-advanced-chat.css'
 import {parseTimestamp} from "@/utils/dates";
 
@@ -62,15 +65,22 @@ export default {
 
 
             },
-            messages:[ ],
+            messages:[],
             rooms: [
                 {
                     roomId: '1',
                     roomName: 'Puns',
                     avatar: '/images/cooking.png',
+                    unreadCount: 1,
                     users: [
-                        {_id: '1234', username: 'John Doe'},
-                        {_id: '4321', username: 'John Snow'}
+                        {_id: '1234', username: 'John Doe', status: {
+                                state: 'online',
+                                lastChanged: 'today, 14:30'
+                            }},
+                        {_id: '4321', username: 'John Snow', status: {
+                                state: 'online',
+                                lastChanged: 'today, 14:30'
+                            }}
                     ],
                     lastMessage: {
                         _id: '1234',
@@ -83,15 +93,24 @@ export default {
                         timestamp: parseTimestamp(new Date(), 'HH:mm'),
 
                     },
+                    typingUsers: [ 4321 ]
                 },
 
                 {
                     roomId: '2',
                     roomName: 'Fun Facts',
                     avatar: '/images/fun-fact.png',
+                    unreadCount: 1,
                     users: [
-                        {_id: '1234', username: 'John Doe'},
-                        {_id: '4321', username: 'John Snow'}
+                        {_id: '1234', username: 'John Doe', status: {
+                                state: 'online',
+                                lastChanged: 'today, 14:30'
+                            }},
+                        {_id: '4321', username: 'John Snow', status: {
+                                state: 'online',
+                                lastChanged: 'today, 14:30'
+                            }
+                        }
                     ],
                     lastMessage: {
                         _id: '1234',
@@ -109,9 +128,16 @@ export default {
                     roomId: '3',
                     roomName: '3am Jokes',
                     avatar: '/images/joking.png',
+                    unreadCount: 1,
                     users: [
-                        {_id: '1234', username: 'John Doe'},
-                        {_id: '4321', username: 'John Snow'}
+                        {_id: '1234', username: 'John Doe', status: {
+                                state: 'online',
+                                lastChanged: 'today, 14:30'
+                            }},
+                        {_id: '4321', username: 'John Snow', status: {
+                                state: 'online',
+                                lastChanged: 'today, 14:30'
+                            }}
                     ],
                     lastMessage: {
                         _id: '1234',
@@ -129,9 +155,16 @@ export default {
                     roomId: '4',
                     roomName: 'Quotes',
                     avatar: '/images/quote.png',
+                    unreadCount: 1,
                     users: [
-                        {_id: '1234', username: 'John Doe'},
-                        {_id: '4321', username: 'John Snow'}
+                        {_id: '1234', username: 'John Doe', status: {
+                                state: 'online',
+                                lastChanged: 'today, 14:30'
+                            }},
+                        {_id: '4321', username: 'John Snow', status: {
+                                state: 'online',
+                                lastChanged: 'today, 14:30'
+                            }}
                     ],
                     lastMessage: {
                         _id: '1234',
@@ -168,7 +201,7 @@ export default {
             {
                 _id: '7890',
                 indexId: 12092,
-                content: 'Pun absolutely intended 😝....* badam tiss * 🥁. Pick a number between 1 and 50',
+                content: 'Pun absolutely intended ....* badam tiss * 🥁. ',
                 senderId: '4321',
                 username: 'John Doe',
                 avatar: '/images/cooking.png',
@@ -181,11 +214,14 @@ export default {
                 seen: true,
                 disableActions: false,
                 disableReactions: false,
-            },
+                reactions: {
+                        "🥁": ['1234'],
+                },
+                },
                 {
                     _id: '78913',
                     indexId: 120922,
-                    content: 'Some cool fun facts 💡😀😲 awaits you. Input a number between 1 and 100 to begin. 🙃',
+                    content: 'Some cool fun facts 💡 you might never heard of.',
                     senderId: '4321',
                     username: 'John Doe',
                     avatar: '/images/fun-fact.png',
@@ -198,12 +234,15 @@ export default {
                     seen: true,
                     disableActions: false,
                     disableReactions: false,
+                    reactions: {
+                        "💡": ['1234',],
+                    },
                 },
 
                 {
                     _id: '78113',
                     indexId: 1230922,
-                    content: "Jokes So bad they shouldn't be seeing the light of day 🙂😁🤣. Input a number between 1 and 30 to see them",
+                    content: "Jokes So bad they shouldn't be seeing the light of day 😁.",
                     senderId: '4321',
                     username: 'John Doe',
                     avatar: '/images/joking.png',
@@ -216,12 +255,15 @@ export default {
                     seen: true,
                     disableActions: false,
                     disableReactions: false,
+                    reactions: {
+                        "😁": ['1234',],
+                    },
                 },
 
                 {
                     _id: '78213',
                     indexId: 12312,
-                    content: "Motivational,inspirational,famous quotes to brighten your day.🧘‍♀️🧘‍♂💆‍♂️💆‍♀️",
+                    content: "Motivational,inspirational and famous quotes to brighten your day.🧘‍",
                     senderId: '4321',
                     username: 'John Doe',
                     avatar: '/images/quote.png',
@@ -234,6 +276,9 @@ export default {
                     seen: true,
                     disableActions: false,
                     disableReactions: false,
+                    reactions: {
+                        "🧘": ['1234',],
+                    },
                 },
 
 
@@ -243,7 +288,27 @@ export default {
             this.messages = introductoryMessages.filter(x=>x.roomId===room.roomId)
             this.messagesLoaded=true
 
-        }
+        },
+
+         sendMessageReaction({ reaction, remove, messageId, roomId }) {
+
+            console.log(toRaw(this.messages))
+
+             this.messages.map((val,obj)=>{
+
+                if(val.roomId === roomId && val._id === messageId && !remove){
+                    return{
+                        ...val,
+                        reactions: val.reactions[reaction.unicode] = ['1234']
+                    }
+
+                }
+
+            })
+
+            console.log(toRaw(this.messages))
+
+        },
 
     },
 
