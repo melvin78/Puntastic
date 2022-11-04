@@ -17,13 +17,14 @@
         :messages-loaded="messagesLoaded"
         @send-message-reaction="sendMessageReaction($event)"
         @fetch-messages="fetchMessages"
+        @send-message="sendMessage($event)"
     >
     </chat-window>
 </template>
 
 <script>
 import ChatWindow from 'vue-advanced-chat'
-import { reactive, toRaw } from 'vue'
+import {reactive, toRaw} from 'vue'
 import 'vue-advanced-chat/dist/vue-advanced-chat.css'
 import {parseTimestamp} from "@/utils/dates";
 
@@ -34,7 +35,7 @@ export default {
 
     data: () => {
         return {
-            styles:{
+            styles: {
                 content: {
                     background: 'url(/images/bg-icon.svg)'
                 },
@@ -63,9 +64,8 @@ export default {
                 },
 
 
-
             },
-            messages:[],
+            messages: [],
             rooms: [
                 {
                     roomId: '1',
@@ -73,14 +73,18 @@ export default {
                     avatar: '/images/cooking.png',
                     unreadCount: 1,
                     users: [
-                        {_id: '1234', username: 'John Doe', status: {
+                        {
+                            _id: '1234', username: 'John Doe', status: {
                                 state: 'online',
                                 lastChanged: 'today, 14:30'
-                            }},
-                        {_id: '4321', username: 'John Snow', status: {
+                            }
+                        },
+                        {
+                            _id: '4321', username: 'John Snow', status: {
                                 state: 'online',
                                 lastChanged: 'today, 14:30'
-                            }}
+                            }
+                        }
                     ],
                     lastMessage: {
                         _id: '1234',
@@ -93,7 +97,7 @@ export default {
                         timestamp: parseTimestamp(new Date(), 'HH:mm'),
 
                     },
-                    typingUsers: [ 4321 ]
+                    typingUsers: [4321]
                 },
 
                 {
@@ -102,11 +106,14 @@ export default {
                     avatar: '/images/fun-fact.png',
                     unreadCount: 1,
                     users: [
-                        {_id: '1234', username: 'John Doe', status: {
+                        {
+                            _id: '1234', username: 'John Doe', status: {
                                 state: 'online',
                                 lastChanged: 'today, 14:30'
-                            }},
-                        {_id: '4321', username: 'John Snow', status: {
+                            }
+                        },
+                        {
+                            _id: '4321', username: 'John Snow', status: {
                                 state: 'online',
                                 lastChanged: 'today, 14:30'
                             }
@@ -130,14 +137,18 @@ export default {
                     avatar: '/images/joking.png',
                     unreadCount: 1,
                     users: [
-                        {_id: '1234', username: 'John Doe', status: {
+                        {
+                            _id: '1234', username: 'John Doe', status: {
                                 state: 'online',
                                 lastChanged: 'today, 14:30'
-                            }},
-                        {_id: '4321', username: 'John Snow', status: {
+                            }
+                        },
+                        {
+                            _id: '4321', username: 'John Snow', status: {
                                 state: 'online',
                                 lastChanged: 'today, 14:30'
-                            }}
+                            }
+                        }
                     ],
                     lastMessage: {
                         _id: '1234',
@@ -157,14 +168,18 @@ export default {
                     avatar: '/images/quote.png',
                     unreadCount: 1,
                     users: [
-                        {_id: '1234', username: 'John Doe', status: {
+                        {
+                            _id: '1234', username: 'John Doe', status: {
                                 state: 'online',
                                 lastChanged: 'today, 14:30'
-                            }},
-                        {_id: '4321', username: 'John Snow', status: {
+                            }
+                        },
+                        {
+                            _id: '4321', username: 'John Snow', status: {
                                 state: 'online',
                                 lastChanged: 'today, 14:30'
-                            }}
+                            }
+                        }
                     ],
                     lastMessage: {
                         _id: '1234',
@@ -187,36 +202,61 @@ export default {
             roomsLoaded: true,
             messagesLoaded: false,
             loadingRooms: false,
-            textMessages:{
-            TYPE_MESSAGE: 'Input random number between 1 and 100',
+            textMessages: {
+                TYPE_MESSAGE: 'Input random number between 1 and 100',
             },
-            options :{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
+            options: {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
 
         }
     },
 
     methods: {
-        fetchMessages({ room, options = {} }){
-            const introductoryMessages = [
-            {
-                _id: '7890',
-                indexId: 12092,
-                content: 'Pun absolutely intended ....* badam tiss * 🥁. ',
-                senderId: '4321',
+        sendMessage({content, roomId, files, replyMessage}) {
+            const message = {
+                _id: Math.random(),
+                content: content,
+                senderId: '1234',
                 username: 'John Doe',
-                avatar: '/images/cooking.png',
                 date: parseTimestamp(new Date(), 'DD MMMM YYYY'),
                 timestamp: parseTimestamp(new Date(), 'HH:mm'),
                 system: false,
-                roomId: '1',
+                roomId: roomId,
                 saved: true,
                 distributed: true,
                 seen: true,
                 disableActions: false,
                 disableReactions: false,
-                reactions: {
+
+
+            }
+
+            this.messages.push(message)
+
+
+        },
+
+
+        fetchMessages({room, options = {}}) {
+            const introductoryMessages = [
+                {
+                    _id: '7890',
+                    indexId: 12092,
+                    content: 'Pun absolutely intended ....* badam tiss * 🥁. ',
+                    senderId: '4321',
+                    username: 'John Doe',
+                    avatar: '/images/cooking.png',
+                    date: parseTimestamp(new Date(), 'DD MMMM YYYY'),
+                    timestamp: parseTimestamp(new Date(), 'HH:mm'),
+                    system: false,
+                    roomId: '1',
+                    saved: true,
+                    distributed: true,
+                    seen: true,
+                    disableActions: false,
+                    disableReactions: false,
+                    reactions: {
                         "🥁": ['1234'],
-                },
+                    },
                 },
                 {
                     _id: '78913',
@@ -282,22 +322,19 @@ export default {
                 },
 
 
-
             ]
 
-            this.messages = introductoryMessages.filter(x=>x.roomId===room.roomId)
-            this.messagesLoaded=true
+            this.messages = introductoryMessages.filter(x => x.roomId === room.roomId)
+            this.messagesLoaded = true
 
         },
 
-         sendMessageReaction({ reaction, remove, messageId, roomId }) {
+        sendMessageReaction({reaction, remove, messageId, roomId}) {
 
-            console.log(toRaw(this.messages))
+            this.messages.map((val, obj) => {
 
-             this.messages.map((val,obj)=>{
-
-                if(val.roomId === roomId && val._id === messageId && !remove){
-                    return{
+                if (val.roomId === roomId && val._id === messageId && !remove) {
+                    return {
                         ...val,
                         reactions: val.reactions[reaction.unicode] = ['1234']
                     }
@@ -306,17 +343,11 @@ export default {
 
             })
 
-            console.log(toRaw(this.messages))
 
         },
 
     },
 
-
-    mounted() {
-
-
-    }
 }
 </script>
 
