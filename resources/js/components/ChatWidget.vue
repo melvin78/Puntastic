@@ -12,6 +12,7 @@
         :rooms="rooms"
         :message-actions="[]"
         :rooms-loaded="roomsLoaded"
+        @open-failed-message="openedFailedMessage($event)"
         :loading-rooms="loadingRooms"
         :messages="messages"
         :messages-loaded="messagesLoaded"
@@ -27,6 +28,7 @@ import ChatWindow from 'vue-advanced-chat'
 import {reactive, toRaw} from 'vue'
 import 'vue-advanced-chat/dist/vue-advanced-chat.css'
 import {parseTimestamp} from "@/utils/dates";
+import {IsValidNumberBetweenOneAndHundred} from "@/utils/validator";
 
 
 export default {
@@ -213,24 +215,29 @@ export default {
 
     methods: {
         sendMessage({content, roomId, files, replyMessage}) {
-            const message = {
-                _id: Math.random(),
-                content: content,
-                senderId: '1234',
-                username: 'John Doe',
-                date: parseTimestamp(new Date(), 'DD MMMM YYYY'),
-                timestamp: parseTimestamp(new Date(), 'HH:mm'),
-                system: false,
-                roomId: roomId,
-                saved: true,
-                distributed: true,
-                seen: true,
-                disableActions: false,
-                disableReactions: false,
+
+            if (IsValidNumberBetweenOneAndHundred(content)){
+                const message = {
+                    _id: Math.random(),
+                    content: content,
+                    senderId: '1234',
+                    username: 'John Doe',
+                    date: parseTimestamp(new Date(), 'DD MMMM YYYY'),
+                    timestamp: parseTimestamp(new Date(), 'HH:mm'),
+                    system: false,
+                    roomId: roomId,
+                    saved: true,
+                    distributed: true,
+                    seen: true,
+                    disableActions: false,
+                    disableReactions: false,
 
 
+                }
+                this.messages.push(message)
             }
-            this.messages.push(message)
+
+
         },
 
         fetchMessages({room, options = {}}) {
@@ -334,6 +341,10 @@ export default {
             })
 
         },
+
+        openedFailedMessage({ roomId, message }){
+            console.log('here')
+        }
 
     },
 
