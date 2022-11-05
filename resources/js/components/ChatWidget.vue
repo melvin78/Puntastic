@@ -229,12 +229,8 @@ export default {
 
 
             }
-
             this.messages.push(message)
-
-
         },
-
 
         fetchMessages({room, options = {}}) {
             const introductoryMessages = [
@@ -278,7 +274,6 @@ export default {
                         "💡": ['1234',],
                     },
                 },
-
                 {
                     _id: '78113',
                     indexId: 1230922,
@@ -299,7 +294,6 @@ export default {
                         "😁": ['1234',],
                     },
                 },
-
                 {
                     _id: '78213',
                     indexId: 12312,
@@ -320,8 +314,6 @@ export default {
                         "🧘": ['1234',],
                     },
                 },
-
-
             ]
 
             this.messages = introductoryMessages.filter(x => x.roomId === room.roomId)
@@ -332,17 +324,13 @@ export default {
         sendMessageReaction({reaction, remove, messageId, roomId}) {
 
             this.messages.map((val, obj) => {
-
                 if (val.roomId === roomId && val._id === messageId && !remove) {
                     return {
                         ...val,
                         reactions: val.reactions[reaction.unicode] = ['1234']
                     }
-
                 }
-
             })
-
 
         },
 
