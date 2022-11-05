@@ -18,6 +18,7 @@
         :messages-loaded="messagesLoaded"
         @send-message-reaction="sendMessageReaction($event)"
         @fetch-messages="fetchMessages"
+        @typing-message="typingMessage($event)"
         @send-message="sendMessage($event)"
     >
     </chat-window>
@@ -25,15 +26,26 @@
 
 <script>
 import ChatWindow from 'vue-advanced-chat'
-import {reactive, toRaw} from 'vue'
 import 'vue-advanced-chat/dist/vue-advanced-chat.css'
 import {parseTimestamp} from "@/utils/dates";
 import {IsValidNumberBetweenOneAndHundred} from "@/utils/validator";
+import {useMessagesStore} from "@/pinia/messages-store";
 
 
 export default {
     name: "ChatWidget",
     components: {ChatWindow},
+    setup() {
+        const messagesStore = useMessagesStore()
+
+        return {messagesStore}
+    },
+    computed: {
+
+
+    },
+
+
 
     data: () => {
         return {
@@ -99,7 +111,7 @@ export default {
                         timestamp: parseTimestamp(new Date(), 'HH:mm'),
 
                     },
-                    typingUsers: [4321]
+                    typingUsers: []
                 },
 
                 {
@@ -235,98 +247,22 @@ export default {
 
                 }
                 this.messages.push(message)
+                this.messages.map((val, obj) => {
+                    if (val.roomId === roomId) {
+                        return {
+                            ...val,
+                            typingUsers: ['4321']
+                        }
+                    }
+                })
             }
 
 
         },
 
         fetchMessages({room, options = {}}) {
-            const introductoryMessages = [
-                {
-                    _id: '7890',
-                    indexId: 12092,
-                    content: 'Pun absolutely intended ....* badam tiss * 🥁. ',
-                    senderId: '4321',
-                    username: 'John Doe',
-                    avatar: '/images/cooking.png',
-                    date: parseTimestamp(new Date(), 'DD MMMM YYYY'),
-                    timestamp: parseTimestamp(new Date(), 'HH:mm'),
-                    system: true,
-                    roomId: '1',
-                    saved: true,
-                    distributed: true,
-                    seen: true,
-                    disableActions: false,
-                    disableReactions: false,
-                    reactions: {
-                        "🥁": ['1234'],
-                    },
-                },
-                {
-                    _id: '78913',
-                    indexId: 120922,
-                    content: 'Some cool fun facts 💡 you might never heard of.',
-                    senderId: '4321',
-                    username: 'John Doe',
-                    avatar: '/images/fun-fact.png',
-                    date: parseTimestamp(new Date(), 'DD MMMM YYYY'),
-                    timestamp: parseTimestamp(new Date(), 'HH:mm'),
-                    system: true,
-                    roomId: '2',
-                    saved: true,
-                    distributed: true,
-                    seen: true,
-                    disableActions: false,
-                    disableReactions: false,
-                    reactions: {
-                        "💡": ['1234',],
-                    },
-                },
-                {
-                    _id: '78113',
-                    indexId: 1230922,
-                    content: "Jokes So bad they shouldn't be seeing the light of day 😁.",
-                    senderId: '4321',
-                    username: 'John Doe',
-                    avatar: '/images/joking.png',
-                    date: parseTimestamp(new Date(), 'DD MMMM YYYY'),
-                    timestamp: parseTimestamp(new Date(), 'HH:mm'),
-                    system: true,
-                    roomId: '3',
-                    saved: true,
-                    distributed: true,
-                    seen: true,
-                    disableActions: false,
-                    disableReactions: false,
-                    reactions: {
-                        "😁": ['1234',],
-                    },
-                },
-                {
-                    _id: '78213',
-                    indexId: 12312,
-                    content: "Motivational,inspirational and famous quotes to brighten your day.🧘‍",
-                    senderId: '4321',
-                    username: 'John Doe',
-                    avatar: '/images/quote.png',
-                    date: parseTimestamp(new Date(), 'DD MMMM YYYY'),
-                    timestamp: parseTimestamp(new Date(), 'HH:mm'),
-                    system: true,
-                    roomId: '4',
-                    saved: true,
-                    distributed: true,
-                    seen: true,
-                    disableActions: false,
-                    disableReactions: false,
-                    reactions: {
-                        "🧘": ['1234',],
-                    },
-                },
-            ]
-
-            this.messages = introductoryMessages.filter(x => x.roomId === room.roomId)
+            this.messages = this.messagesStore.getMessages.filter(x=>x.roomId === room.roomId)
             this.messagesLoaded = true
-
         },
 
         sendMessageReaction({reaction, remove, messageId, roomId}) {
@@ -341,8 +277,10 @@ export default {
             })
 
         },
-
-        openedFailedMessage({ roomId, message }){
+        typingMessage({ roomId, message}){
+                console.log('here')
+        },
+        openedFailedMessage({roomId, message}){
             console.log('here')
         }
 
