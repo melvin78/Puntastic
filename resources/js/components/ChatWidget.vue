@@ -204,6 +204,7 @@ export default {
             loadingRooms: false,
             textMessages: {
                 TYPE_MESSAGE: 'Input random number between 1 and 100',
+                IS_ONLINE: 'Online',
             },
             options: {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
 
@@ -243,7 +244,7 @@ export default {
                     avatar: '/images/cooking.png',
                     date: parseTimestamp(new Date(), 'DD MMMM YYYY'),
                     timestamp: parseTimestamp(new Date(), 'HH:mm'),
-                    system: false,
+                    system: true,
                     roomId: '1',
                     saved: true,
                     distributed: true,
@@ -263,7 +264,7 @@ export default {
                     avatar: '/images/fun-fact.png',
                     date: parseTimestamp(new Date(), 'DD MMMM YYYY'),
                     timestamp: parseTimestamp(new Date(), 'HH:mm'),
-                    system: false,
+                    system: true,
                     roomId: '2',
                     saved: true,
                     distributed: true,
@@ -283,7 +284,7 @@ export default {
                     avatar: '/images/joking.png',
                     date: parseTimestamp(new Date(), 'DD MMMM YYYY'),
                     timestamp: parseTimestamp(new Date(), 'HH:mm'),
-                    system: false,
+                    system: true,
                     roomId: '3',
                     saved: true,
                     distributed: true,
@@ -303,7 +304,7 @@ export default {
                     avatar: '/images/quote.png',
                     date: parseTimestamp(new Date(), 'DD MMMM YYYY'),
                     timestamp: parseTimestamp(new Date(), 'HH:mm'),
-                    system: false,
+                    system: true,
                     roomId: '4',
                     saved: true,
                     distributed: true,
