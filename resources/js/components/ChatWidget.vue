@@ -214,7 +214,7 @@ export default {
             random: [],
             Attachment: [],
             roomsLoaded: true,
-            messagesLoaded: false,
+            messagesLoaded: true,
             loadingRooms: false,
             textMessages: {
                 TYPE_MESSAGE: 'Input random number between 1 and 100',
@@ -246,23 +246,33 @@ export default {
 
 
                 }
-                this.messages.push(message)
-                this.messages.map((val, obj) => {
-                    if (val.roomId === roomId) {
-                        return {
-                            ...val,
-                            typingUsers: ['4321']
-                        }
-                    }
-                })
+
+                this.messagesStore.setMessages(message)
+                this.messages = this.messagesStore.getMessages.filter(x=>x.roomId===roomId)
+                this.messagesLoaded = true
+
+
+                // this.messages.push(message)
+                // this.messages.map((val, obj) => {
+                //     if (val.roomId === roomId) {
+                //         return {
+                //             ...val,
+                //             typingUsers: ['4321']
+                //         }
+                //     }
+                // })
             }
 
 
         },
 
         fetchMessages({room, options = {}}) {
-            this.messages = this.messagesStore.getMessages.filter(x=>x.roomId === room.roomId)
-            this.messagesLoaded = true
+            this.messagesLoaded = false
+            this.messages = this.messagesStore.getMessages.filter(x => x.roomId === room.roomId)
+
+            setTimeout(() => {
+                this.messagesLoaded = true
+            },1000)
         },
 
         sendMessageReaction({reaction, remove, messageId, roomId}) {
@@ -285,6 +295,18 @@ export default {
         }
 
     },
+
+
+    mounted() {
+
+        this.messagesLoaded = false
+        this.messages = this.messagesStore.getMessages.filter(x=>x.roomId === '1');
+
+        setTimeout(()=>{
+            this.messagesLoaded = true
+        },1000)
+
+    }
 
 }
 </script>
