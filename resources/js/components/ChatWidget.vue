@@ -247,9 +247,25 @@ export default {
 
                 }
 
+                const responseMessage = {
+                    _id: Math.random(),
+                    content: "nice",
+                    senderId: '4321',
+                    username: 'John Doe',
+                    date: parseTimestamp(new Date(), 'DD MMMM YYYY'),
+                    timestamp: parseTimestamp(new Date(), 'HH:mm'),
+                    system: false,
+                    roomId: roomId,
+                    saved: true,
+                    distributed: true,
+                    seen: true,
+                    disableActions: false,
+                    disableReactions: false,
+                }
+
                 this.messagesStore.setMessages(message)
+                this.messagesStore.setMessages(responseMessage)
                 this.messages = this.messagesStore.getMessages.filter(x=>x.roomId===roomId)
-                this.messagesLoaded = true
 
 
                 // this.messages.push(message)
