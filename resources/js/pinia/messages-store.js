@@ -99,5 +99,6 @@ export const useMessagesStore = defineStore('messages-store', {
         setMessages(message) {
             this.messages.push(message)
         },
-    },
+
+    }
 })

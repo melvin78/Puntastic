@@ -30,6 +30,7 @@ import 'vue-advanced-chat/dist/vue-advanced-chat.css'
 import {parseTimestamp} from "@/utils/dates";
 import {IsValidNumberBetweenOneAndHundred} from "@/utils/validator";
 import {useMessagesStore} from "@/pinia/messages-store";
+import {useRoomsStore} from "@/pinia/rooms-store";
 
 
 export default {
@@ -37,8 +38,9 @@ export default {
     components: {ChatWindow},
     setup() {
         const messagesStore = useMessagesStore()
+        const roomsStore = useRoomsStore()
 
-        return {messagesStore}
+        return {messagesStore,roomsStore}
     },
     computed: {
 
@@ -80,6 +82,7 @@ export default {
 
             },
             messages: [],
+            typingMessageCache: '',
             rooms: [
                 {
                     roomId: '1',
@@ -143,6 +146,7 @@ export default {
                         date: parseTimestamp(new Date(), 'DD MMMM YYYY'),
                         timestamp: parseTimestamp(new Date(), 'HH:mm'),
                     },
+                    typingUsers: []
                 },
 
                 {
@@ -163,6 +167,7 @@ export default {
                                 lastChanged: 'today, 14:30'
                             }
                         }
+
                     ],
                     lastMessage: {
                         _id: '1234',
@@ -174,6 +179,7 @@ export default {
                         date: parseTimestamp(new Date(), 'DD MMMM YYYY'),
                         timestamp: parseTimestamp(new Date(), 'HH:mm'),
                     },
+                    typingUsers: []
                 },
 
                 {
@@ -205,6 +211,7 @@ export default {
                         date: parseTimestamp(new Date(), 'DD MMMM YYYY'),
                         timestamp: parseTimestamp(new Date(), 'HH:mm'),
                     },
+                    typingUsers: []
                 },
 
 
@@ -219,6 +226,7 @@ export default {
             textMessages: {
                 TYPE_MESSAGE: 'Input random number between 1 and 100',
                 IS_ONLINE: 'Online',
+                IS_TYPING: 'is typing...'
             },
             options: {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
 
@@ -238,6 +246,7 @@ export default {
                     timestamp: parseTimestamp(new Date(), 'HH:mm'),
                     system: false,
                     roomId: roomId,
+                    avatar: '/images/fun-fact.png',
                     saved: true,
                     distributed: true,
                     seen: true,
@@ -255,6 +264,7 @@ export default {
                     date: parseTimestamp(new Date(), 'DD MMMM YYYY'),
                     timestamp: parseTimestamp(new Date(), 'HH:mm'),
                     system: false,
+                    avatar: '/images/fun-fact.png',
                     roomId: roomId,
                     saved: true,
                     distributed: true,
@@ -262,24 +272,21 @@ export default {
                     disableActions: false,
                     disableReactions: false,
                 }
+                 this.messagesStore.setMessages(message)
+                 this.roomsStore.updateTypingUsers(roomId)
+                 this.responseMessage(roomId,responseMessage)
+                 this.messages = this.messagesStore.getMessages.filter(x=>x.roomId===roomId)
 
-                this.messagesStore.setMessages(message)
-                this.messagesStore.setMessages(responseMessage)
-                this.messages = this.messagesStore.getMessages.filter(x=>x.roomId===roomId)
-
-
-                // this.messages.push(message)
-                // this.messages.map((val, obj) => {
-                //     if (val.roomId === roomId) {
-                //         return {
-                //             ...val,
-                //             typingUsers: ['4321']
-                //         }
-                //     }
-                // })
             }
 
 
+        },
+
+
+        async responseMessage(roomId,responseMessage){
+            this.roomsStore.removeTypingUsers(roomId).then(()=>{
+               this.messagesStore.setMessages(responseMessage)
+            })
         },
 
         fetchMessages({room, options = {}}) {
@@ -304,7 +311,22 @@ export default {
 
         },
         typingMessage({ roomId, message}){
-                console.log('here')
+            // if (roomId) {
+            //     if (message?.length > 1) {
+            //         this.typingMessageCache = message
+            //         return
+            //     }
+            //
+            //     if (message?.length === 1 && this.typingMessageCache) {
+            //         this.typingMessageCache = message
+            //         return
+            //     }
+            //
+            //     this.typingMessageCache = message
+            //
+            //     this.roomsStore.updateTypingUsers(roomId)
+            //
+            // }
         },
         openedFailedMessage({roomId, message}){
             console.log('here')
@@ -317,6 +339,7 @@ export default {
 
         this.messagesLoaded = false
         this.messages = this.messagesStore.getMessages.filter(x=>x.roomId === '1');
+        this.rooms = this.roomsStore.getRooms;
 
         setTimeout(()=>{
             this.messagesLoaded = true
