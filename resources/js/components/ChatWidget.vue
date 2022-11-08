@@ -340,6 +340,9 @@ export default {
             this.messagesLoaded = true
         },1000)
 
+        const BEARER_TOKEN = import.meta.env.VITE_PUSHER_APP_KEY;
+
+        console.log(BEARER_TOKEN);
     }
 
 }
