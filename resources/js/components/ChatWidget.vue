@@ -271,6 +271,7 @@ export default {
                     seen: true,
                     disableActions: false,
                     disableReactions: false,
+                    reactions: {}
                 }
                  this.messagesStore.setMessages(message)
                  this.roomsStore.updateTypingUsers(roomId)
@@ -300,14 +301,8 @@ export default {
 
         sendMessageReaction({reaction, remove, messageId, roomId}) {
 
-            this.messages.map((val, obj) => {
-                if (val.roomId === roomId && val._id === messageId && !remove) {
-                    return {
-                        ...val,
-                        reactions: val.reactions[reaction.unicode] = ['1234']
-                    }
-                }
-            })
+            this.messagesStore.updateMessageReaction(reaction, remove, messageId, roomId)
+            this.messages = this.messagesStore.getMessages.filter(x => x.roomId === roomId)
 
         },
         typingMessage({ roomId, message}){

@@ -100,5 +100,16 @@ export const useMessagesStore = defineStore('messages-store', {
             this.messages.push(message)
         },
 
+        updateMessageReaction(reaction, remove, messageId, roomId){
+           return this.messages.map((val, obj) => {
+                if (val.roomId === roomId && val._id === messageId && !remove) {
+                    return {
+                        ...val,
+                        reactions: val.reactions[reaction.unicode] = ['1234']
+                    }
+                }
+            })
+        }
+
     }
 })
