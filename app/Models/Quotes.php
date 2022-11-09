@@ -9,5 +9,5 @@ class Quotes extends Model
 {
     use HasFactory;
 
-    protected $table= "quotes";
+    protected $collection = "quotes";
 }

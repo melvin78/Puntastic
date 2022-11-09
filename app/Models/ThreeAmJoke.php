@@ -9,5 +9,5 @@ class ThreeAmJoke extends Model
 {
     use HasFactory;
 
-    protected $table = "three_am_jokes";
+    protected $collection = "three_am_jokes";
 }

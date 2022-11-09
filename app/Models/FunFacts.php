@@ -9,5 +9,5 @@ class FunFacts extends Model
 {
     use HasFactory;
 
-    protected $table = "fun_facts";
+    protected $collection = "fun_facts";
 }
