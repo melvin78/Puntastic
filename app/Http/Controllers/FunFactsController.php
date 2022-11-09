@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 
 class FunFactsController extends Controller
 {
-    public function index($id)
+    public function index(int $id)
     {
-      return FunFacts::all();
+      return FunFacts::where('fun_fact_number',$id)->get();
     }
 
 }
