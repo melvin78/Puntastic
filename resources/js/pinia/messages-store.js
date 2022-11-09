@@ -1,5 +1,6 @@
 import {defineStore} from 'pinia'
 import {parseTimestamp} from "@/utils/dates";
+import {ContentType} from "@/constants/content-types";
 
 
 export const useMessagesStore = defineStore('messages-store', {
@@ -7,25 +8,25 @@ export const useMessagesStore = defineStore('messages-store', {
 
         messages: [
             {
-            _id: '7890',
-            indexId: 12092,
-            content: 'Pun absolutely intended ....* badam tiss * 🥁. ',
-            senderId: '4321',
-            username: 'John Doe',
-            avatar: '/images/cooking.png',
-            date: parseTimestamp(new Date(), 'DD MMMM YYYY'),
-            timestamp: parseTimestamp(new Date(), 'HH:mm'),
-            system: true,
-            roomId: '1',
-            saved: true,
-            distributed: true,
-            seen: true,
-            disableActions: false,
-            disableReactions: false,
-            reactions: {
-                "🥁": ['1234'],
+                _id: '7890',
+                indexId: 12092,
+                content: 'Pun absolutely intended ....* badam tiss * 🥁. ',
+                senderId: '4321',
+                username: 'John Doe',
+                avatar: '/images/cooking.png',
+                date: parseTimestamp(new Date(), 'DD MMMM YYYY'),
+                timestamp: parseTimestamp(new Date(), 'HH:mm'),
+                system: true,
+                roomId: '1',
+                saved: true,
+                distributed: true,
+                seen: true,
+                disableActions: false,
+                disableReactions: false,
+                reactions: {
+                    "🥁": ['1234'],
+                },
             },
-        },
             {
                 _id: '78913',
                 indexId: 120922,
@@ -87,11 +88,11 @@ export const useMessagesStore = defineStore('messages-store', {
                 }
             }
 
-                ]
+        ]
 
     }),
     getters: {
-        getMessages(state){
+        getMessages(state) {
             return state.messages
         },
     },
@@ -100,8 +101,8 @@ export const useMessagesStore = defineStore('messages-store', {
             this.messages.push(message)
         },
 
-        updateMessageReaction(reaction, remove, messageId, roomId){
-           return this.messages.map((val, obj) => {
+        updateMessageReaction(reaction, remove, messageId, roomId) {
+            return this.messages.map((val, obj) => {
                 if (val.roomId === roomId && val._id === messageId && !remove) {
                     return {
                         ...val,
@@ -109,6 +110,36 @@ export const useMessagesStore = defineStore('messages-store', {
                     }
                 }
             })
+        },
+
+        async getContentMessage(roomId, messageNumber) {
+            switch (roomId) {
+                case ContentType.PUNS:
+                    await fetch(`/api/puns/${messageNumber}`)
+                        .then((response) => response.json())
+                        .then((data) => console.log(data));
+                    break
+
+                case ContentType.FUN_FACTS:
+                    await fetch(`/api/fun-facts/${messageNumber}`)
+                        .then((response) => response.json())
+                        .then((data) => console.log(data))
+                    break
+
+                case ContentType.THREE_AM_JOKES:
+                    await fetch(`/api/three-am/${messageNumber}`)
+                        .then((response) => response.json())
+                        .then((data) => console.log(data))
+                    break
+
+                case ContentType.QUOTES:
+                    await fetch(`/api/quotes/${messageNumber}`)
+                        .then((response) => response.json())
+                        .then((data) => console.log(data))
+                    break
+
+            }
+
         }
 
     }

@@ -236,6 +236,7 @@ export default {
     methods: {
         sendMessage({content, roomId, files, replyMessage}) {
 
+
             if (IsValidNumberBetweenOneAndHundred(content)){
                 const message = {
                     _id: Math.random(),
@@ -256,7 +257,7 @@ export default {
 
                 }
 
-                const responseMessage = {
+                 const responseMessage = {
                     _id: Math.random(),
                     content: "nice",
                     senderId: '4321',
@@ -275,8 +276,10 @@ export default {
                 }
                  this.messagesStore.setMessages(message)
                  this.roomsStore.updateTypingUsers(roomId)
-                 this.responseMessage(roomId,responseMessage)
                  this.messages = this.messagesStore.getMessages.filter(x=>x.roomId===roomId)
+                 this.messagesStore.getContentMessage(roomId,content).then(()=>{
+                     this.roomsStore.removeTypingUsers(roomId)
+                 })
 
             }
 
