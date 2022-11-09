@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('fun_facts', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->integer('fun_fact_number');
+            $table->string('description');
         });
     }
 

@@ -16,6 +16,9 @@ return new class extends Migration
         Schema::create('puns', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->integer('pun_number');
+            $table->string('part_one');
+            $table->string('part_two');
         });
     }
 

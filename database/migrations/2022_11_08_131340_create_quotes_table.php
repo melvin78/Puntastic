@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('quotes', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->integer('quote_number');
+            $table->string('description');
         });
     }
 
