@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\FunFactsController;
+use App\Http\Controllers\PunsController;
+use App\Http\Controllers\QuotesController;
+use App\Http\Controllers\ThreeAmJokeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +18,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+
+Route::controller(FunFactsController::class)->group(function (){
+    Route::get('/fun-facts/{id}','index');
 });
+
+Route::controller(PunsController::class)->group(function (){
+    Route::get('/puns/{id}','index');
+});
+
+Route::controller(QuotesController::class)->group(function (){
+    Route::get('/quotes/{id}','index');
+});
+
+Route::controller(ThreeAmJokeController::class)->group(function (){
+    Route::get('/three-am/{id}','index');
+});
+
+
