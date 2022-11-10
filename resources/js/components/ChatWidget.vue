@@ -1,6 +1,6 @@
 <template>
     <chat-window
-        :current-user-id="'1234'"
+        :current-user-id="currentUserId"
         :text-messages="textMessages"
         :height="'500px'"
         :theme="'dark'"
@@ -31,6 +31,7 @@ import {parseTimestamp} from "@/utils/dates";
 import {IsValidNumberBetweenOneAndHundred} from "@/utils/validator";
 import {useMessagesStore} from "@/pinia/messages-store";
 import {useRoomsStore} from "@/pinia/rooms-store";
+import {ContentType, USERS} from "@/constants/content-types";
 
 
 export default {
@@ -216,6 +217,9 @@ export default {
 
 
             ],
+            currentUserId: USERS.HUMAN_USER,
+            chatBotUserId: USERS.CHAT_BOT,
+            funFactRoom: ContentType.FUN_FACTS,
             socketId: '',
             files: [],
             random: [],
@@ -257,28 +261,13 @@ export default {
 
                 }
 
-                 const responseMessage = {
-                    _id: Math.random(),
-                    content: "nice",
-                    senderId: '4321',
-                    username: 'John Doe',
-                    date: parseTimestamp(new Date(), 'DD MMMM YYYY'),
-                    timestamp: parseTimestamp(new Date(), 'HH:mm'),
-                    system: false,
-                    avatar: '/images/fun-fact.png',
-                    roomId: roomId,
-                    saved: true,
-                    distributed: true,
-                    seen: true,
-                    disableActions: false,
-                    disableReactions: false,
-                    reactions: {}
-                }
+
                  this.messagesStore.setMessages(message)
                  this.roomsStore.updateTypingUsers(roomId)
                  this.messages = this.messagesStore.getMessages.filter(x=>x.roomId===roomId)
                  this.messagesStore.getContentMessage(roomId,content).then(()=>{
                      this.roomsStore.removeTypingUsers(roomId)
+                     this.messages = this.messagesStore.getMessages.filter(x=>x.roomId===roomId)
                  })
 
             }

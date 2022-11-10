@@ -1,6 +1,7 @@
 import {defineStore} from 'pinia'
 import {parseTimestamp} from "@/utils/dates";
 import {ContentType} from "@/constants/content-types";
+import {formatServerMessage} from "@/utils/modify-message";
 
 
 export const useMessagesStore = defineStore('messages-store', {
@@ -123,7 +124,12 @@ export const useMessagesStore = defineStore('messages-store', {
                 case ContentType.FUN_FACTS:
                     await fetch(`/api/fun-facts/${messageNumber}`)
                         .then((response) => response.json())
-                        .then((data) => console.log(data))
+                        .then(
+                            (data) =>{
+                                const responseMessage = formatServerMessage(data[0],roomId)
+                                console.log(data)
+                                this.messages.push(responseMessage)
+                            })
                     break
 
                 case ContentType.THREE_AM_JOKES:

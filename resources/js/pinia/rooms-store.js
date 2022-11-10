@@ -170,7 +170,7 @@ export const useRoomsStore = defineStore('rooms-store', {
                     }
                 });
                 resolve();
-            }, 3000));
+            }, 1000));
 
         }
     }
