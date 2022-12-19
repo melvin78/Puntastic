@@ -89,7 +89,6 @@ export default {
                     roomId: '1',
                     roomName: 'Puns',
                     avatar: '/images/cooking.png',
-                    unreadCount: 1,
                     users: [
                         {
                             _id: '1234', username: 'John Doe', status: {
@@ -122,7 +121,6 @@ export default {
                     roomId: '2',
                     roomName: 'Fun Facts',
                     avatar: '/images/fun-fact.png',
-                    unreadCount: 1,
                     users: [
                         {
                             _id: '1234', username: 'John Doe', status: {
@@ -154,7 +152,6 @@ export default {
                     roomId: '3',
                     roomName: '3am Jokes',
                     avatar: '/images/joking.png',
-                    unreadCount: 1,
                     users: [
                         {
                             _id: '1234', username: 'John Doe', status: {
@@ -187,7 +184,6 @@ export default {
                     roomId: '4',
                     roomName: 'Quotes',
                     avatar: '/images/quote.png',
-                    unreadCount: 1,
                     users: [
                         {
                             _id: '1234', username: 'John Doe', status: {
@@ -270,6 +266,7 @@ export default {
                      this.messages = this.messagesStore.getMessages.filter(x=>x.roomId===roomId)
                  })
 
+
             }
 
 
@@ -286,6 +283,7 @@ export default {
             this.messagesLoaded = false
             this.messages = this.messagesStore.getMessages.filter(x => x.roomId === room.roomId)
 
+
             setTimeout(() => {
                 this.messagesLoaded = true
             },1000)
@@ -293,7 +291,7 @@ export default {
 
         sendMessageReaction({reaction, remove, messageId, roomId}) {
 
-            this.messagesStore.updateMessageReaction(reaction, remove, messageId, roomId)
+            this.messagesStore.updateFunFactMessageReaction(reaction, remove, messageId, roomId)
             this.messages = this.messagesStore.getMessages.filter(x => x.roomId === roomId)
 
         },
@@ -316,7 +314,7 @@ export default {
             // }
         },
         openedFailedMessage({roomId, message}){
-            console.log('here')
+
         }
 
     },

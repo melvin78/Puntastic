@@ -1,7 +1,8 @@
 import {defineStore} from 'pinia'
 import {parseTimestamp} from "@/utils/dates";
-import {ContentType} from "@/constants/content-types";
+import {ContentType, USERS} from "@/constants/content-types";
 import {formatServerMessage} from "@/utils/modify-message";
+import * as Console from "console";
 
 
 export const useMessagesStore = defineStore('messages-store', {
@@ -101,9 +102,30 @@ export const useMessagesStore = defineStore('messages-store', {
         setMessages(message) {
             this.messages.push(message)
         },
+       async updateFunFactMessageReaction(reaction, remove, messageId, roomId) {
 
-        updateMessageReaction(reaction, remove, messageId, roomId) {
+
+            const newReaction =  {
+                reaction:reaction.unicode,
+                user:window.localStorage.getItem('chat-app')??10,
+                identifier:messageId
+            }
+            await fetch(`/api/update-fun-fact-reaction`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+
+                    body: JSON.stringify(newReaction),
+                },
+            )
+                .then((response) => response.json())
+                .then((data) => console.log(data));
+
             return this.messages.map((val, obj) => {
+
                 if (val.roomId === roomId && val._id === messageId && !remove) {
                     return {
                         ...val,
@@ -112,7 +134,6 @@ export const useMessagesStore = defineStore('messages-store', {
                 }
             })
         },
-
         async getContentMessage(roomId, messageNumber) {
             switch (roomId) {
                 case ContentType.PUNS:
@@ -145,6 +166,28 @@ export const useMessagesStore = defineStore('messages-store', {
                     break
 
             }
+
+        },
+
+        async updateMessageReactions(messageId,reaction,userId){
+
+            const newReaction =  {
+                "🥁": ['1234'],
+            }
+            await fetch(`/api/updateReactions/${messageId}/${userId}`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+
+                    body: JSON.stringify(newReaction),
+                },
+                )
+                .then((response) => response.json())
+                .then((data) => console.log(data));
+
 
         }
 

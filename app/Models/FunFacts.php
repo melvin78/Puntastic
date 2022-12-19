@@ -10,4 +10,9 @@ class FunFacts extends Model
     use HasFactory;
 
     protected $collection = "fun_facts";
+
+    protected $fillable = [
+        // other fillable attributes
+        'fun_fact_number',
+    ];
 }

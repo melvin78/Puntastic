@@ -3,6 +3,7 @@
 use App\Http\Controllers\FunFactsController;
 use App\Http\Controllers\PunsController;
 use App\Http\Controllers\QuotesController;
+use App\Http\Controllers\ReactionController;
 use App\Http\Controllers\ThreeAmJokeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(FunFactsController::class)->group(function (){
     Route::get('/fun-facts/{id}','index');
+    Route::post('/update-message-reaction/{id}/{userId}','updateReactions');
+    Route::get('/tes','test');
 });
 
 Route::controller(PunsController::class)->group(function (){
@@ -33,6 +36,14 @@ Route::controller(QuotesController::class)->group(function (){
 
 Route::controller(ThreeAmJokeController::class)->group(function (){
     Route::get('/three-am/{id}','index');
+});
+
+
+Route::controller(ReactionController::class)->group(function (){
+    Route::post('/update-fun-fact-reaction','UpdateFunFactsReaction');
+    Route::post('/update-puns-reaction','UpdatePunsReaction');
+    Route::post('/update-three-am-joke-reaction','UpdateThreeAmJokeReaction');
+    Route::post('/update-quotes-reaction','UpdateQuotesReaction');
 });
 
 
