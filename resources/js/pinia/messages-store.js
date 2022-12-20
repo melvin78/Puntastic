@@ -2,7 +2,7 @@ import {defineStore} from 'pinia'
 import {parseTimestamp} from "@/utils/dates";
 import {ContentType, USERS} from "@/constants/content-types";
 import {formatServerMessage} from "@/utils/modify-message";
-import * as Console from "console";
+import state from "pusher-js/src/core/http/state";
 
 
 export const useMessagesStore = defineStore('messages-store', {
@@ -90,24 +90,28 @@ export const useMessagesStore = defineStore('messages-store', {
                 }
             }
 
-        ]
+        ],
+        currentUserId:'',
 
     }),
     getters: {
         getMessages(state) {
             return state.messages
         },
+        getCurrentUserId(state){
+            return state.currentUserId
+        }
     },
     actions: {
         setMessages(message) {
             this.messages.push(message)
         },
-       async updateFunFactMessageReaction(reaction, remove, messageId, roomId) {
+        async updateFunFactMessageReaction(reaction, remove, messageId, roomId) {
 
 
             const newReaction =  {
                 reaction:reaction.unicode,
-                user:window.localStorage.getItem('chat-app')??10,
+                user:window.sessionStorage.getItem('web-melvin-chat-app'),
                 identifier:messageId
             }
             await fetch(`/api/update-fun-fact-reaction`,
@@ -168,7 +172,6 @@ export const useMessagesStore = defineStore('messages-store', {
             }
 
         },
-
         async updateMessageReactions(messageId,reaction,userId){
 
             const newReaction =  {
@@ -189,6 +192,9 @@ export const useMessagesStore = defineStore('messages-store', {
                 .then((data) => console.log(data));
 
 
+        },
+        setCurrentUserId(currentUserId){
+            this.currentUserId = currentUserId
         }
 
     }

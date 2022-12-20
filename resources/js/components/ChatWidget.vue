@@ -228,7 +228,7 @@ export default {
                 IS_ONLINE: 'Online',
                 IS_TYPING: 'is typing...'
             },
-            options: {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
+            options: {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'},
 
         }
     },
@@ -241,7 +241,7 @@ export default {
                 const message = {
                     _id: Math.random(),
                     content: content,
-                    senderId: '1234',
+                    senderId: this.currentUserId,
                     username: 'John Doe',
                     date: parseTimestamp(new Date(), 'DD MMMM YYYY'),
                     timestamp: parseTimestamp(new Date(), 'HH:mm'),
@@ -323,17 +323,28 @@ export default {
     mounted() {
 
         this.messagesLoaded = false
-        this.messages = this.messagesStore.getMessages.filter(x=>x.roomId === '1');
+        this.messages = this.messagesStore.getMessages.filter(x => x.roomId === '1');
         this.rooms = this.roomsStore.getRooms;
 
-        setTimeout(()=>{
+        setTimeout(() => {
             this.messagesLoaded = true
-        },1000)
+        }, 1000)
 
-        const BEARER_TOKEN = import.meta.env.VITE_PUSHER_APP_KEY;
+    },
 
-        console.log(BEARER_TOKEN);
+    created() {
+        if (!window.sessionStorage.getItem('web-melvin-chat-app')){
+            const randomUserId = Math.floor(1000 + Math.random() * 9000);
+            this.currentUserId = `'${randomUserId}'`
+            window.sessionStorage.setItem('web-melvin-chat-app',`'${randomUserId}'`)
+        }
+        else{
+            this.currentUserId = window.sessionStorage.getItem('web-melvin-chat-app')
+        }
+
+
     }
+
 
 }
 </script>
