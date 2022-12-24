@@ -91,14 +91,14 @@ export const useMessagesStore = defineStore('messages-store', {
             }
 
         ],
-        currentUserId:'',
+        currentUserId: '',
 
     }),
     getters: {
         getMessages(state) {
             return state.messages
         },
-        getCurrentUserId(state){
+        getCurrentUserId(state) {
             return state.currentUserId
         }
     },
@@ -109,11 +109,42 @@ export const useMessagesStore = defineStore('messages-store', {
         async updateFunFactMessageReaction(reaction, remove, messageId, roomId) {
 
 
-            const newReaction =  {
-                reaction:reaction.unicode,
-                user:window.sessionStorage.getItem('web-melvin-chat-app'),
-                identifier:messageId
+            const newReaction = {
+                reaction: reaction.unicode,
+                user: window.sessionStorage.getItem('web-melvin-chat-app'),
+                identifier: messageId,
+                action: remove ? 'remove' : 'add'
             }
+
+            if (remove) {
+                this.messages.map((val, obj) => {
+
+                    if (val.roomId === roomId && val._id === messageId) {
+                        let usersWhoReactedWithThisEmoji = val.reactions[reaction.unicode]
+                        let currentUserId = window.sessionStorage.getItem('web-melvin-chat-app')
+                        return {
+                            ...val,
+                            reactions: usersWhoReactedWithThisEmoji.splice(usersWhoReactedWithThisEmoji.indexOf(currentUserId),1)
+                        }
+                    }
+                })
+            }
+            else{
+                this.messages.map((val, obj) => {
+
+                    if (val.roomId === roomId && val._id === messageId) {
+                        let usersWhoReactedWithThisEmoji = val.reactions[reaction.unicode]
+                        let currentUserId = window.sessionStorage.getItem('web-melvin-chat-app')
+                        return {
+                            ...val,
+                            reactions: usersWhoReactedWithThisEmoji.push(currentUserId)
+                        }
+                    }
+                })
+            }
+
+
+
             await fetch(`/api/update-fun-fact-reaction`,
                 {
                     method: 'POST',
@@ -126,17 +157,11 @@ export const useMessagesStore = defineStore('messages-store', {
                 },
             )
                 .then((response) => response.json())
-                .then((data) => console.log(data));
+                .then((data) => {
 
-            return this.messages.map((val, obj) => {
+                });
 
-                if (val.roomId === roomId && val._id === messageId && !remove) {
-                    return {
-                        ...val,
-                        reactions: val.reactions[reaction.unicode] = ['1234']
-                    }
-                }
-            })
+
         },
         async getContentMessage(roomId, messageNumber) {
             switch (roomId) {
@@ -150,8 +175,8 @@ export const useMessagesStore = defineStore('messages-store', {
                     await fetch(`/api/fun-facts/${messageNumber}`)
                         .then((response) => response.json())
                         .then(
-                            (data) =>{
-                                const responseMessage = formatServerMessage(data[0],roomId)
+                            (data) => {
+                                const responseMessage = formatServerMessage(data[0], roomId)
                                 console.log(data)
                                 this.messages.push(responseMessage)
                             })
@@ -172,9 +197,9 @@ export const useMessagesStore = defineStore('messages-store', {
             }
 
         },
-        async updateMessageReactions(messageId,reaction,userId){
+        async updateMessageReactions(messageId, reaction, userId) {
 
-            const newReaction =  {
+            const newReaction = {
                 "🥁": ['1234'],
             }
             await fetch(`/api/updateReactions/${messageId}/${userId}`,
@@ -187,13 +212,13 @@ export const useMessagesStore = defineStore('messages-store', {
 
                     body: JSON.stringify(newReaction),
                 },
-                )
+            )
                 .then((response) => response.json())
                 .then((data) => console.log(data));
 
 
         },
-        setCurrentUserId(currentUserId){
+        setCurrentUserId(currentUserId) {
             this.currentUserId = currentUserId
         }
 

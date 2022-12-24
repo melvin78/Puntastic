@@ -10,3 +10,7 @@ export const USERS = {
     CHAT_BOT: '4321'
 
 }
+
+export const  STATUS_CODES = {
+    SUCCESSFULLY_REMOVED_REACTION:1
+}

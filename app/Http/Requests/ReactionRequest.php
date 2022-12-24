@@ -26,7 +26,8 @@ class ReactionRequest extends FormRequest
         return [
             'reaction'=>'required',
             'user'=>'required',
-            'identifier'=>'required'
+            'identifier'=>'required',
+            'action'=>'required'
         ];
     }
 }

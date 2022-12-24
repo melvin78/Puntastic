@@ -16,8 +16,16 @@ class ReactionController extends Controller
 
         $emoji =$validatedReactionRequest["reaction"];
         $parsed_emoji = html_entity_decode($emoji, ENT_QUOTES, 'UTF-8');
-        return FunFacts::where('_id', $validatedReactionRequest["identifier"])
-            ->push('reactions.'.$parsed_emoji,$validatedReactionRequest["user"],true);
+
+        if ($validatedReactionRequest["action"]==="add"){
+           return FunFacts::where('_id', $validatedReactionRequest["identifier"])
+                ->push('reactions.'.$parsed_emoji,$validatedReactionRequest["user"],true);
+        }
+        else{
+            return FunFacts::where('_id', $validatedReactionRequest["identifier"])
+                ->pull('reactions.'.$parsed_emoji,$validatedReactionRequest["user"],true);
+        }
+
     }
 
     public function UpdatePunsReaction(ReactionRequest $reactionRequest){

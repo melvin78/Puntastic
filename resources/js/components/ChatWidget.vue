@@ -335,8 +335,8 @@ export default {
     created() {
         if (!window.sessionStorage.getItem('web-melvin-chat-app')){
             const randomUserId = Math.floor(1000 + Math.random() * 9000);
-            this.currentUserId = `'${randomUserId}'`
-            window.sessionStorage.setItem('web-melvin-chat-app',`'${randomUserId}'`)
+            this.currentUserId = `${randomUserId}`
+            window.sessionStorage.setItem('web-melvin-chat-app',`${randomUserId}`)
         }
         else{
             this.currentUserId = window.sessionStorage.getItem('web-melvin-chat-app')
