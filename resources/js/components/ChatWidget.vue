@@ -28,7 +28,7 @@
 import ChatWindow from 'vue-advanced-chat'
 import 'vue-advanced-chat/dist/vue-advanced-chat.css'
 import {parseTimestamp} from "@/utils/dates";
-import {IsValidNumberBetweenOneAndHundred} from "@/utils/validator";
+import {generateRandomString, IsValidNumberBetweenOneAndHundred} from "@/utils/validator";
 import {useMessagesStore} from "@/pinia/messages-store";
 import {useRoomsStore} from "@/pinia/rooms-store";
 import {ContentType, USERS} from "@/constants/content-types";
@@ -334,7 +334,7 @@ export default {
 
     created() {
         if (!window.sessionStorage.getItem('web-melvin-chat-app')){
-            const randomUserId = Math.floor(1000 + Math.random() * 9000);
+            const randomUserId = generateRandomString()
             this.currentUserId = `${randomUserId}`
             window.sessionStorage.setItem('web-melvin-chat-app',`${randomUserId}`)
         }
