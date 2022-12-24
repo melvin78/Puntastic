@@ -133,11 +133,11 @@ export const useMessagesStore = defineStore('messages-store', {
                 this.messages.map((val, obj) => {
 
                     if (val.roomId === roomId && val._id === messageId) {
-                        let usersWhoReactedWithThisEmoji = val.reactions[reaction.unicode]
                         let currentUserId = window.sessionStorage.getItem('web-melvin-chat-app')
+                        let usersWhoReactedWithThisEmoji = !!val.reactions[reaction.unicode]
                         return {
                             ...val,
-                            reactions: usersWhoReactedWithThisEmoji.push(currentUserId)
+                            reactions: usersWhoReactedWithThisEmoji ? val.reactions[reaction.unicode].push(currentUserId): val.reactions[reaction.unicode] = [currentUserId]
                         }
                     }
                 })
