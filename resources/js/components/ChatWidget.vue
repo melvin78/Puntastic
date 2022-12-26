@@ -291,7 +291,7 @@ export default {
 
         sendMessageReaction({reaction, remove, messageId, roomId}) {
 
-            this.messagesStore.updateFunFactMessageReaction(reaction, remove, messageId, roomId)
+            this.messagesStore.updateMessageReaction(reaction, remove, messageId, roomId)
             this.messages = this.messagesStore.getMessages.filter(x => x.roomId === roomId)
 
         },
