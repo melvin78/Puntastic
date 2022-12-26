@@ -319,7 +319,10 @@ export const useMessagesStore = defineStore('messages-store', {
                 case ContentType.THREE_AM_JOKES:
                     await fetch(`/api/three-am/${messageNumber}`)
                         .then((response) => response.json())
-                        .then((data) => console.log(data))
+                        .then((data) => {
+                            const responseMessage = formatServerMessage(data[0], roomId)
+                            this.messages.push(responseMessage)
+                        })
                     break
 
                 case ContentType.QUOTES:

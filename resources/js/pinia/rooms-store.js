@@ -72,39 +72,6 @@ export const useRoomsStore = defineStore('rooms-store', {
             },
 
             {
-                roomId: '3',
-                roomName: '3am Jokes',
-                avatar: '/images/joking.png',
-                unreadCount: 1,
-                users: [
-                    {
-                        _id: '1234', username: 'John Doe', status: {
-                            state: 'online',
-                            lastChanged: 'today, 14:30'
-                        }
-                    },
-                    {
-                        _id: '4321', username: 'John Snow', status: {
-                            state: 'online',
-                            lastChanged: 'today, 14:30'
-                        }
-                    }
-
-                ],
-                lastMessage: {
-                    _id: '1234',
-                    content: "Can't Sleep?",
-                    senderId: '1234',
-                    username: 'John Doe',
-                    distributed: true,
-                    seen: true,
-                    date: parseTimestamp(new Date(), 'DD MMMM YYYY'),
-                    timestamp: parseTimestamp(new Date(), 'HH:mm'),
-                },
-                typingUsers: []
-            },
-
-            {
                 roomId: '4',
                 roomName: 'Quotes',
                 avatar: '/images/quote.png',
