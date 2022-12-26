@@ -325,7 +325,11 @@ export const useMessagesStore = defineStore('messages-store', {
                 case ContentType.QUOTES:
                     await fetch(`/api/quotes/${messageNumber}`)
                         .then((response) => response.json())
-                        .then((data) => console.log(data))
+                        .then(
+                            (data) => {
+                                const responseMessage = formatServerMessage(data[0], roomId)
+                                this.messages.push(responseMessage)
+                            })
                     break
 
             }
