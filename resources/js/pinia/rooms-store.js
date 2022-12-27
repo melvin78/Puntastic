@@ -8,7 +8,7 @@ export const useRoomsStore = defineStore('rooms-store', {
         rooms: [
             {
                 roomId: '1',
-                roomName: 'Puns',
+                roomName: 'Puns & Jokes',
                 avatar: '/images/cooking.png',
                 unreadCount: 1,
                 users: [
