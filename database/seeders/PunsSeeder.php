@@ -153,6 +153,149 @@ class PunsSeeder extends Seeder
 
             ]
         ];
-        DB::table('puns')->insert($puns);
+        $Puns_two = [
+            [
+                'pun_number' => 21,
+                'description' => "what kind of tea ☕ is hard to swallow?....Reality",
+                'reactions' => [
+                    '😆' => ['1234']
+                ]
+            ],
+            [
+                'pun_number' => 22,
+                'description' => "Sometimes i hate my job, all i do is crush cans all day....its soda pressing🍺 ",
+                'reactions' => [
+                    '😆' => ['1234']
+                ]
+            ],
+            [
+                'pun_number' => 23,
+                'description' => "I have got a horse 🐎 named Mayo....Mayo neighs",
+                'reactions' => [
+                    '😆' => ['1234']
+                ]
+            ],
+            [
+                'pun_number' => 24,
+                'description' => "Which of the king Arthur's knight was chosen to make the round table?🤺.....Sir Curmference",
+                'reactions' => [
+                    '😄' => ['1234']
+                ]
+            ],
+            [
+                'pun_number' => 25,
+                'description' => "I only believe 12.5% of the Bible 🤲...i guess that makes me an eighth-theist",
+                'reactions' => [
+                    '🤣' => ['1234']
+                ]
+            ],
+            [
+                'pun_number' => 26,
+                'description' => "'Sugar😋' is the only word in the English language where 'su-' makes a 'sh' sound...  at least, i'm pretty sure that's correct....when 'Suit yourself' takes on a whole new meaning",
+                'reactions' => [
+                    '🤣' => ['1234']
+                ]
+            ],
+            [
+                'pun_number' => 27,
+                'description' => "Andrew Garfield, Tobey Maguire and Tom Holland got into an accident upon arriving at a party🕺....As it turns out they are terrible parallel parkers",
+                'reactions' => [
+                    '🤣' => ['1234']
+                ]
+            ],
+            [
+                'pun_number' => 28,
+                'description' => "Andrew Garfield, Tobey Maguire and Tom Holland got into an accident upon arriving at a party🕺....As it turns out they are terrible parallel parkers",
+                'reactions' => [
+                    '🤣' => ['1234']
+                ]
+            ],
+            [
+                'pun_number' => 29,
+                'description' => "What is the difference between grey and gray?....one is a color 🌈, and the other is a color",
+                'reactions' => [
+                    '😁' => ['1234']
+                ]
+            ],
+            [
+                'pun_number' => 30,
+                'description' => "I have lost 20% of my couch....ouch. This is the funniest couch joke i've seen sofa🤭",
+                'reactions' => [
+                    '😁' => ['1234']
+                ]
+            ],
+            [
+                'pun_number' => 31,
+                'description' => "I saw a one legged man at the ATM🏧...he was checking his balance",
+                'reactions' => [
+                    '😁' => ['1234']
+                ]
+            ],
+            [
+                'pun_number' => 32,
+                'description' => "My man proposed in the gym 🏋️ but she said no....safe to day it didn't work out",
+                'reactions' => [
+                    '😁' => ['1234']
+                ]
+            ],
+            [
+                'pun_number' => 33,
+                'description' => "The man who survived pepper spray🌶 and mustard gas is now a seasoned veteran",
+                'reactions' => [
+                    '😂' => ['1234']
+                ]
+            ],
+            [
+                'pun_number' => 34,
+                'description' => "A chemist accidentally froze himself at -273.15c...dont worry though he's 0k ....What a cold🥶 thing to say....i think i should chill its nothing to cryo-ver😜",
+                'reactions' => [
+                    '😂' => ['1234']
+                ]
+            ],
+            [
+                'pun_number' => 35,
+                'description' => "I accidentally drank some Holy Water 💧 with my laxative....i am about to start a religious movment",
+                'reactions' => [
+                    '😂' => ['1234']
+                ]
+            ],
+            [
+                'pun_number' => 36,
+                'description' => "I think my wife left me because of my gambling 💵 addiction....wanna bet?",
+                'reactions' => [
+                    '🤣' => ['1234']
+                ]
+            ],
+
+            [
+                'pun_number' => 37,
+                'description' => "What is the difference between a vegan🥬 and a computer programmer💻?...one is disgusted by a rack of lamb and the other is disgusted by a lack of RAM",
+                'reactions' => [
+                    '🤣' => ['1234']
+                ]
+            ],
+            [
+                'pun_number' => 38,
+                'description' => "Is it crazy how saying sentences backwards🥴... creates backwards sentences saying how crazy it is",
+                'reactions' => [
+                    '😆' => ['1234']
+                ]
+            ],
+            [
+                'pun_number' => 39,
+                'description' => "If A is for apple🍎 and B is for banana 🍌 what is C for?...plastic explosives",
+                'reactions' => [
+                    '😆' => ['1234']
+                ]
+            ],
+            [
+                'pun_number' => 40,
+                'description' => "My coworkers laugh at my jokes in in-person meetings,but never in online meetings....when i asked them why, they said that my jokes weren't remotely funny.",
+                'reactions' => [
+                    '😆' => ['1234']
+                ]
+            ],
+        ];
+        DB::table('puns')->insert($Puns_two);
     }
 }
