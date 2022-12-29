@@ -296,6 +296,80 @@ class PunsSeeder extends Seeder
                 ]
             ],
         ];
-        DB::table('puns')->insert($Puns_two);
+
+        $puns_three = [
+            [
+                'pun_number' => 41,
+                'description' => "What do you call a cow🐮 with no legs?...ground beef...with two legs...lean beef and with all legs high steaks",
+                'reactions' => [
+                    '😆' => ['1234']
+                ]
+            ],
+            [
+                'pun_number' => 42,
+                'description' => "Did you hear👂 about the guy who lost the left side if his body?....he's alright now",
+                'reactions' => [
+                    '🤣' => ['1234']
+                ]
+            ],
+            [
+                'pun_number' => 43,
+                'description' => "What did the bufallo say to his son?...Bison",
+                'reactions' => [
+                    '😅' => ['1234']
+                ]
+            ],
+            [
+                'pun_number' => 44,
+                'description' => "Whats its called when you have too many aliens👽?...Extraterrestrials",
+                'reactions' => [
+                    '😅' => ['1234']
+                ]
+            ],
+            [
+                'pun_number' => 45,
+                'description' => "Do you know sign🖖 language?...You should learn it....its pretty handy",
+                'reactions' => [
+                    '😁' => ['1234']
+                ]
+            ],
+            [
+                'pun_number' => 46,
+                'description' => "What does a clock🕜 do when its hungry?....it goes back for seconds",
+                'reactions' => [
+                    '😁' => ['1234']
+                ]
+            ],
+            [
+                'pun_number' => 47,
+                'description' => "i used to be afraid of hurdles🌀...but i got over them",
+                'reactions' => [
+                    '😁' => ['1234']
+                ]
+            ],
+            [
+                'pun_number' => 48,
+                'description' => "How does Moses make coffee☕?....Hebrews it",
+                'reactions' => [
+                    '😁' => ['1234']
+                ]
+            ],
+            [
+                'pun_number' => 49,
+                'description' => "How much does it cost to make santa's sleigh to move🎅?...eight bucks",
+                'reactions' => [
+                    '😁' => ['1234']
+                ]
+            ],
+            [
+                'pun_number' => 50,
+                'description' => "Why do drum 🥁 kits have the strongest password protection?....because they contain special cymbals",
+                'reactions' => [
+                    '🥁' => ['1234']
+                ]
+            ],
+        ];
+
+        DB::table('puns')->insert($puns_three);
     }
 }
