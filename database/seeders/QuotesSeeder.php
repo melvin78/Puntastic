@@ -251,6 +251,171 @@ class QuotesSeeder extends Seeder
             ],
         ];
 
-        DB::table('quotes')->insert($quotes);
+        $quotes_two= [
+            [
+                'quote_number'=>31,
+                'description'=> "If you become a soldier, you'll be a general. If you become a monk you'll end up as the pope.' Instead i became a painter and wound up as Picasso -*_Pablo Picasso_*",
+                'reactions' => [
+                    '🎨' => ['1234']
+                ]
+
+            ],
+            [
+                'quote_number'=>32,
+                'description'=> "The whole problem with the world is that fools and fanatics are always so certain of themselves, but wiser people so full of doubts -*_Bertrand Russell_*",
+                'reactions' => [
+                    '✍' => ['1234']
+                ]
+
+            ],
+            [
+                'quote_number'=>33,
+                'description'=> "Those who make peaceful revolution impossible will make violent revolution inevitable. -*_John F. Kennedy_*",
+                'reactions' => [
+                    '✍' => ['1234']
+                ]
+
+            ],
+            [
+                'quote_number'=>34,
+                'description'=> "The most merciful thing in the world, I think, is the inability of the human mind to correlate all its contents. We live on a placid island of ignorance in the midst of black seas of infinity, and it was not meant that we should voyage far. The sciences, each straining in its own direction, have hitherto harmed us little; but some day the piecing together of dissociated knowledge will open up such terrifying vistas of reality, and of our frightful position therein, that we shall either go mad from the revelation or flee from the deadly light into the peace and safety of a new dark age.. -*_H.P. Lovecraft_*",
+                'reactions' => [
+                    '✍' => ['1234']
+                ]
+
+            ],
+            [
+                'quote_number'=>35,
+                'description'=> "We, the unwilling, led by the unknowing, are doing the impossible for the ungrateful. We have done so much, for so long, with so little, we are now qualified to do anything with nothing. -*_Konstantin Jireček_*",
+                'reactions' => [
+                    '✍' => ['1234']
+                ]
+
+            ],
+            [
+                'quote_number'=>36,
+                'description'=> "Stand amongst the ashes of a trillion dead souls and ask the ghosts if honor matters
+...The silence is your answer. ",
+                'reactions' => [
+                    '✍' => ['1234']
+                ]
+
+            ],
+
+            [
+                'quote_number'=>37,
+                'description'=> "Loneliness does not come from having no one around us but instead being unable to communicate the things that matter most to us. -*_Carl Jung_*",
+                'reactions' => [
+                    '✍' => ['1234']
+                ]
+
+            ],
+            [
+                'quote_number'=>38,
+                'description'=> "How much more grievous are the consequences of anger than the causes of it.. -*_Marcus Aurelius_*",
+                'reactions' => [
+                    '✍' => ['1234']
+                ]
+
+            ],
+            [
+                'quote_number'=>39,
+                'description'=> "Nothing in this world can take the place of persistence. Talent will not; nothing is more common than unsuccessful men with talent. Genius will not; unrewarded genius is almost a proverb. Education will not; the world is full of educated derelicts. Persistence and determination alone are omnipotent. The slogan Press On! has solved and always will solve the problems of the human race.. -*_-Calvin Coolidge_*",
+                'reactions' => [
+                    '✍' => ['1234']
+                ]
+
+            ],
+            [
+                'quote_number'=>40,
+                'description'=> "It is possible to make no mistakes and lose. That is not failure, that is life.. -*_-Cpt Jean Luc Picard_*",
+                'reactions' => [
+                    '✍' => ['1234']
+                ]
+
+            ],
+            [
+                'quote_number'=>41,
+                'description'=> "Every lie we tell incurs a debt to the truth. Sooner or later that debt is paid. -*_-Valery Legasov_*",
+                'reactions' => [
+                    '✍' => ['1234']
+                ]
+
+            ],
+            [
+                'quote_number'=>42,
+                'description'=> "Any fool can be happy. It takes a man with real heart to make beauty out of the stuff that makes us weep. -*_-Clive Barker_*",
+                'reactions' => [
+                    '✍' => ['1234']
+                ]
+
+            ],
+            [
+                'quote_number'=>43,
+                'description'=> "Even the finest sword plunged into salt water will eventually rust. You can be the very best at something but if you’re not in the right environment to prosper you will never become all that you could be.  -*_-Sun Tzu_*",
+                'reactions' => [
+                    '✍' => ['1234']
+                ]
+
+            ],
+            [
+                'quote_number'=>44,
+                'description'=> "It is the mark of an educated mind to be able to entertain a thought without accepting it  -*_-Aristotle_*",
+                'reactions' => [
+                    '✍' => ['1234']
+                ]
+
+            ],
+            [
+                'quote_number'=>45,
+                'description'=> "It is not the critic who counts; not the man who points out how the strong man stumbles, or where the doer of deeds could have done them better. The credit belongs to the man who is actually in the arena, whose face is marred by dust and sweat and blood; who strives valiantly; who errs, who comes short again and again, because there is no effort without error and shortcoming; but who does actually strive to do the deeds; who knows great enthusiasms, the great devotions; who spends himself in a worthy cause; who at the best knows in the end the triumph of high achievement, and who at the worst, if he fails, at least fails while daring greatly, so that his place shall never be with those cold and timid souls who neither know victory nor defeat  -*_-Theodore Roosevelt_*",
+                'reactions' => [
+                    '✍' => ['1234']
+                ]
+
+            ],
+            [
+                'quote_number'=>46,
+                'description'=> "If they can make penicillin out of moldy bread, they can make something out of you -*_-Muhammad Ali_*",
+                'reactions' => [
+                    '✍' => ['1234']
+                ]
+
+            ],
+            [
+                'quote_number'=>47,
+                'description'=> "Pride is not the opposite of shame, but its source. True humility is the only antidote to shame -*_-Iroh_*",
+                'reactions' => [
+                    '✍' => ['1234']
+                ]
+
+            ],
+            [
+                'quote_number'=>48,
+                'description'=> "An entire sea of water can’t sink a ship unless it gets inside the ship. Similarly, the negativity of the world can’t put you down unless you allow it to get inside you. -*_-Goi Nasu_*",
+                'reactions' => [
+                    '✍' => ['1234']
+                ]
+
+            ],
+            [
+                'quote_number'=>49,
+                'description'=> "It's easy to look at people and make quick judgements about them, their present and their past, but you'd be amazed at the pain and tears a single smile hides. What a person shows to the world is only one tiny fascet of the iceberg hidden from sight. And more often than not, it's lined with cracks and scars that go all the way to the foundation of their soul. -*_-Sherrilyn Kenyon_*",
+                'reactions' => [
+                    '✍' => ['1234']
+                ]
+
+            ],
+            [
+                'quote_number'=>50,
+                'description'=> "No man chooses evil because it is evil; he only mistakes it for happiness, the good he seeks.. -*_-Mary Wollstonecraft_*",
+                'reactions' => [
+                    '✍' => ['1234']
+                ]
+
+            ],
+        ];
+
+        DB::table('quotes')->insert($quotes_two);
     }
 }
