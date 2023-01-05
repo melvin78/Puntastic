@@ -12,7 +12,7 @@ export const useMessagesStore = defineStore('messages-store', {
             {
                 _id: '7890',
                 indexId: 12092,
-                content: 'Pun absolutely intended ....* badam tiss * 🥁. ',
+                content: 'Pun absolutely intended ....* badam tiss * 🥁 ',
                 senderId: '4321',
                 username: 'John Doe',
                 avatar: '/images/cooking.png',

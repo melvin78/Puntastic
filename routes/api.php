@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FunFactsController;
+use App\Http\Controllers\OpenAIController;
 use App\Http\Controllers\PunsController;
 use App\Http\Controllers\QuotesController;
 use App\Http\Controllers\ReactionController;
@@ -47,3 +48,6 @@ Route::controller(ReactionController::class)->group(function (){
 });
 
 
+Route::controller(OpenAIController::class)->group(function (){
+    Route::get('/chat-gpt','GetOpinionFromModel');
+});

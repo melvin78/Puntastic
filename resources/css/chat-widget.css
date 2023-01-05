@@ -1455,6 +1455,14 @@
     box-shadow: 0 1px 2px -1px rgba(0, 0, 0, .1), 0 1px 2px -1px rgba(0, 0, 0, .11), 0 1px 5px -1px rgba(0, 0, 0, .11)
 }
 
+
+@media only screen and (min-width: 600px) {
+    .chat-gpt-message-box{
+        margin-left: 42%;
+        margin-right: 2%;
+        margin-top: 2%;}
+}
+
 .vac-message-wrapper .vac-message-current {
     background-color: var(--chat-message-bg-color-me) !important
 }
@@ -1469,6 +1477,18 @@
 .vac-message-wrapper .vac-message-selected {
     background-color: var(--chat-message-bg-color-selected) !important;
     transition: background-color .2s
+}
+
+.vac-message-box.vac-offset-current.chat-gpt-message-box {
+    display: flex;
+    flex-direction: column;
+    margin-left: 72%;
+    margin-right: 2%;
+}
+@media only screen and (min-width: 600px) {
+    .vac-message-box.vac-offset-current.chat-gpt-message-box{margin-left: 42%;
+        margin-right: 2%;
+        margin-top: 2%;}
 }
 
 .vac-message-wrapper .vac-icon-deleted {
@@ -2174,3 +2194,5 @@
     font-size: 9px;
     font-weight: 400
 }
+
+

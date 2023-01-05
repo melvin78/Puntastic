@@ -1,5 +1,6 @@
 import {parseTimestamp} from "@/utils/dates";
-import {ContentType, USERS} from "@/constants/content-types";
+import {ContentType, USERS, CHAT_GPT_TEMPLATES} from "@/constants/content-types";
+
 
 export function formatServerMessage(messageFromServer, roomId){
     let avatarValue = '';
@@ -36,6 +37,11 @@ export function formatServerMessage(messageFromServer, roomId){
         seen: true,
         disableActions: false,
         disableReactions: false,
+        modify:false,
         reactions: messageFromServer.reactions
     }
+}
+
+export function constructFunFactGptTemplate(){
+
 }
