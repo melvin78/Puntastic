@@ -1,5 +1,5 @@
 import {parseTimestamp} from "@/utils/dates";
-import {ContentType, USERS, CHAT_GPT_TEMPLATES} from "@/constants/content-types";
+import {ContentType, USERS} from "@/constants/code-constants";
 
 
 export function formatServerMessage(messageFromServer, roomId){
