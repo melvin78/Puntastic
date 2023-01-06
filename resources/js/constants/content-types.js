@@ -24,7 +24,7 @@ export const CHAT_GPT_TEMPLATES = {
          style="display: flex;flex-direction: column;"><!----><!---->
       <div style="padding: 1px 1px;min-width: 25px;" class="vac-message-container vac-message-container-offset"><span>Choose an option:</span>
       </div>
-      <div style="padding: 1px 1px;min-width: 25px;" class="vac-message-container vac-message-container-offset chat-gpt-query">
+      <div style="padding: 1px 1px;min-width: 25px;" class="vac-message-container vac-message-container-offset fact-check-query">
       <div class="vac-format-message-wrapper">
       <div class="vac-format-container">
          <div class="vac-message-card vac-message-current " style="background-color: rgba(255, 255, 240, 0.11) !important;"><!----><!---->
@@ -35,7 +35,7 @@ export const CHAT_GPT_TEMPLATES = {
      </div>
       </div>
 
-      <div style="padding: 1px 1px;min-width: 25px;" class="vac-message-container vac-message-container-offset chat-gpt-query">
+      <div style="padding: 1px 1px;min-width: 25px;" class="vac-message-container vac-message-container-offset similar-facts-query">
         <div style="background-color: rgba(255, 255, 240, 0.11) !important;" class="vac-message-card vac-message-current  "><!----><!---->
          <span style="display: flex; justify-content: center; text-align: center"><span>Similar Fun Facts 💡</span></span>
 

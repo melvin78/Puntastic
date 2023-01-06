@@ -215,12 +215,23 @@ export default {
         this.messages = this.messagesStore.getMessages.filter(x => x.roomId === '1');
         this.rooms = this.roomsStore.getRooms;
         this.vueAdvancedChatWebComponent = document.querySelector("vue-advanced-chat")
+
+        //fun facts check event listener
         this.vueAdvancedChatWebComponent.shadowRoot.querySelector('div.vac-messages-container').addEventListener('click', (e) => {
-            const target = e.target.closest(".chat-gpt-query"); // Or any other selector.
+            const target = e.target.closest(".fact-check-query"); // Or any other selector.
             if (target) {
-                console.log('here')
+
             }
         })
+
+        //similar fun facts event listener
+        this.vueAdvancedChatWebComponent.shadowRoot.querySelector('div.vac-messages-container').addEventListener('click', (e) => {
+            const target = e.target.closest(".similar-facts-query"); // Or any other selector.
+            if (target) {
+
+            }
+        })
+
         setTimeout(() => {
             this.messagesLoaded = true
             console.log(document.querySelector('.vac-messages-container'))
