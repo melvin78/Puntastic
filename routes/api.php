@@ -49,5 +49,5 @@ Route::controller(ReactionController::class)->group(function (){
 
 
 Route::controller(OpenAIController::class)->group(function (){
-    Route::get('/chat-gpt','GetOpinionFromModel');
+    Route::post('/chat-gpt','GetOpinionFromModel');
 });
