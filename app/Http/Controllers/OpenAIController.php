@@ -18,19 +18,29 @@ class OpenAIController extends Controller
 
         $validatedPromptRequest = $promptRequest->validated();
 
-        $finalPrompt = [];
+        $davinciResponse = [];
 
         switch ($validatedPromptRequest['Context']) {
             case OpenAiChatContexts::FUN_FACT_CHECK->Context():
-                $finalPrompt = [
+                $davinciResponse = [
                     'model' => 'text-davinci-003',
                     'prompt' => $validatedPromptRequest['Prompt'] . '.' . OpenAiChatPrompts::GetPrompts(OpenAiChatContexts::FUN_FACT_CHECK->Context()),
                     'temperature' => 0.8,
                     'max_tokens' => 500
                 ];
+                break;
+
+            case OpenAiChatContexts::SIMILAR_FUN_FACT->Context():
+                $davinciResponse = [
+                    'model' => 'text-davinci-003',
+                    'prompt' => $validatedPromptRequest['Prompt'] . '.' . OpenAiChatPrompts::GetPrompts(OpenAiChatContexts::SIMILAR_FUN_FACT->Context()),
+                    'temperature' => 0.8,
+                    'max_tokens' => 500
+                ];
+                break;
         }
 
-        $result = OpenAI::completions()->create($finalPrompt);
+        $result = OpenAI::completions()->create($davinciResponse);
 
         return response()->json([
             '_id' => Str::random(7),

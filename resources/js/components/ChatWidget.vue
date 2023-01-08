@@ -172,8 +172,10 @@ export default {
 
         async getChatGptOpinion(context){
 
+            const messages = this.messages.filter(x => x.chatGptMessage === false)
+
             let promptRequest = {
-                Prompt: this.messages[this.messages.length - 1].content,
+                Prompt: messages[messages.length - 1].content,
                 Context:context
             }
 
@@ -212,7 +214,7 @@ export default {
 
         this.messagesLoaded = false
 
-        this.messages = this.messagesStore.getMessages.filter(x => x.roomId === '1');
+        this.messages = this.messagesStore.getMessages.filter(x => x.roomId === ContentType.PUNS);
 
         this.rooms = this.roomsStore.getRooms;
 
