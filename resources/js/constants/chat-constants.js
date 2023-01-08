@@ -256,5 +256,11 @@ export const ROOM_TEMPLATES =  [
 
 ]
 
+export const CHAT_GPT_PROMPTS = {
+    FUN_FACT_CHECK:1,
+    SIMILAR_FUN_FACT:2,
+}
+
+
 
 

@@ -1,5 +1,6 @@
 import {defineStore} from 'pinia'
 import {ROOM_TEMPLATES} from "@/constants/chat-constants";
+import {USERS} from "@/constants/code-constants";
 
 
 export const useRoomsStore = defineStore('rooms-store', {
@@ -17,7 +18,7 @@ export const useRoomsStore = defineStore('rooms-store', {
         async updateTypingUsers(roomId) {
 
             const roomWithUserTyping = this.rooms.find(x => x.roomId === roomId)
-            roomWithUserTyping.typingUsers.push('4321')
+            roomWithUserTyping.typingUsers.push(USERS.CHAT_BOT)
 
             this.rooms.forEach((room, index) => {
                 if (room.roomId === roomId) {
@@ -25,7 +26,6 @@ export const useRoomsStore = defineStore('rooms-store', {
                 }
             });
         },
-
 
         async removeTypingUsers(roomId) {
 

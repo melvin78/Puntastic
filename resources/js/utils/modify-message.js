@@ -42,6 +42,21 @@ export function formatServerMessage(messageFromServer, roomId){
     }
 }
 
-export function constructFunFactGptTemplate(){
-
+export function formatChatGptMessage(messageFromChatGpt ,roomId){
+    return  {
+        _id: messageFromChatGpt._id,
+        content: messageFromChatGpt.content,
+        senderId: USERS.CHAT_BOT,
+        username: 'John Doe',
+        date: parseTimestamp(new Date(), 'DD MMMM YYYY'),
+        timestamp: parseTimestamp(new Date(), 'HH:mm'),
+        avatar: "/images/chatgpt.png",
+        roomId: roomId,
+        saved: true,
+        distributed: true,
+        seen: true,
+        disableActions: false,
+        disableReactions: true,
+        modify:false,
+    }
 }

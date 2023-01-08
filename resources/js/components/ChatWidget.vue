@@ -41,8 +41,9 @@ import {generateRandomString, IsValidNumberBetweenOneAndHundred} from "@/utils/v
 import {useMessagesStore} from "@/pinia/messages-store";
 import {useRoomsStore} from "@/pinia/rooms-store";
 import ChatGPTSvgIcon from "@/components/ChatGPTSvgIcon.vue";
-import {CHAT_GPT_TEMPLATES, CHAT_STYLES, TEXT_MESSAGES} from "@/constants/chat-constants";
-import {USERS} from "@/constants/code-constants";
+import {CHAT_GPT_PROMPTS, CHAT_GPT_TEMPLATES, CHAT_STYLES, TEXT_MESSAGES} from "@/constants/chat-constants";
+import {ContentType, USERS} from "@/constants/code-constants";
+import {formatChatGptMessage} from "@/utils/modify-message";
 
 register()
 export default {
@@ -131,6 +132,7 @@ export default {
                 this.messages = this.messagesStore.getMessages.filter(x => x.roomId === roomId)
 
                 this.messagesStore.getContentMessage(roomId, content).then(() => {
+
                     this.roomsStore.removeTypingUsers(roomId)
 
                     this.messages = this.messagesStore.getMessages.filter(x => x.roomId === roomId)
@@ -139,15 +141,6 @@ export default {
 
             }
 
-
-        },
-
-
-        async responseMessage(roomId, responseMessage) {
-
-            this.roomsStore.removeTypingUsers(roomId).then(() => {
-                this.messagesStore.setMessages(responseMessage)
-            })
 
         },
 
@@ -177,6 +170,41 @@ export default {
 
         },
 
+        async getChatGptOpinion(context){
+
+            let promptRequest = {
+                Prompt: this.messages[this.messages.length - 1].content,
+                Context:context
+            }
+
+            this.roomsStore.updateTypingUsers(this.currentRoom)
+
+            await fetch(`/api/chat-gpt`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+
+                    body: JSON.stringify(promptRequest),
+                },
+            )
+                .then((response) => response.json())
+                .then((data) => {
+
+                    const chatGptAnswer = formatChatGptMessage(data,this.currentRoom)
+
+                    this.messagesStore.setMessages(chatGptAnswer)
+
+                    this.messages = this.messagesStore.getMessages.filter(x => x.roomId === this.currentRoom)
+
+                    this.roomsStore.removeTypingUsers(this.currentRoom)
+
+
+                });
+        }
+
     },
 
 
@@ -192,22 +220,30 @@ export default {
 
         //fun facts check event listener
         this.vueAdvancedChatWebComponent.shadowRoot.querySelector('div.vac-messages-container').addEventListener('click', (e) => {
-            const target = e.target.closest(".fact-check-query"); // Or any other selector.
-            if (target) {
 
+            const target = e.target.closest(".fact-check-query"); // Or any other selector.
+
+            if (target && this.currentRoom === ContentType.FUN_FACTS) {
+              this.getChatGptOpinion(CHAT_GPT_PROMPTS.FUN_FACT_CHECK)
             }
+
         })
 
         //similar fun facts event listener
         this.vueAdvancedChatWebComponent.shadowRoot.querySelector('div.vac-messages-container').addEventListener('click', (e) => {
-            const target = e.target.closest(".similar-facts-query"); // Or any other selector.
-            if (target) {
 
+            const target = e.target.closest(".similar-facts-query"); // Or any other selector.
+
+            if (target && this.currentRoom === ContentType.FUN_FACTS) {
+                this.getChatGptOpinion(CHAT_GPT_PROMPTS.SIMILAR_FUN_FACT)
             }
+
         })
 
         setTimeout(() => {
+
             this.messagesLoaded = true
+
         }, 1000)
 
 
@@ -216,6 +252,7 @@ export default {
     created() {
 
         if (!window.sessionStorage.getItem('web-melvin-chat-app')) {
+
             const randomUserId = generateRandomString()
 
             this.currentUserId = `${randomUserId}`
