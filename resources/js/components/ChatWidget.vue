@@ -116,6 +116,22 @@ export default {
 
                     break;
 
+                case ContentType.QUOTES:
+
+                    setTimeout(() => {
+
+                        scrollContainerDiv.classList.add('vac-scroll-smooth')
+
+                        scrollContainerDiv.scrollTo({top: scrollContainerDiv.scrollHeight, behavior: 'smooth'})
+
+                        setTimeout(() => scrollContainerDiv.classList.remove('vac-scroll-smooth'))
+
+                    }, 50)
+
+                    this.vueAdvancedChatWebComponent.shadowRoot.querySelector('div.vac-messages-container span').insertAdjacentHTML('beforeend', CHAT_GPT_TEMPLATES.QUOTES)
+
+                    break;
+
             }
 
 
@@ -228,6 +244,96 @@ export default {
 
 
                 });
+        },
+
+        chatGptFunFactCheck(){
+            this.vueAdvancedChatWebComponent.shadowRoot.querySelector('div.vac-messages-container').addEventListener('click', (e) => {
+
+                const target = e.target.closest(".fact-check-query"); // Or any other selector.
+
+                if (target && this.currentRoom === ContentType.FUN_FACTS) {
+                    this.getChatGptOpinion(CHAT_GPT_PROMPTS.FUN_FACT_CHECK)
+                }
+
+            })
+        },
+        chatGptSimilarFunFact(){
+            this.vueAdvancedChatWebComponent.shadowRoot.querySelector('div.vac-messages-container').addEventListener('click', (e) => {
+
+                const target = e.target.closest(".similar-facts-query"); // Or any other selector.
+
+                if (target && this.currentRoom === ContentType.FUN_FACTS) {
+                    this.getChatGptOpinion(CHAT_GPT_PROMPTS.SIMILAR_FUN_FACT)
+                }
+
+            })
+        },
+        chatGptPunIDontGetIt(){
+            this.vueAdvancedChatWebComponent.shadowRoot.querySelector('div.vac-messages-container').addEventListener('click', (e) => {
+
+                const target = e.target.closest(".dont-get-it"); // Or any other selector.
+
+                if (target && this.currentRoom === ContentType.PUNS_AND_JOKES) {
+                    this.getChatGptOpinion(CHAT_GPT_PROMPTS.PUN_I_DONT_GET_IT)
+                }
+
+            })
+        },
+        chatGptSimilarJoke(){
+            this.vueAdvancedChatWebComponent.shadowRoot.querySelector('div.vac-messages-container').addEventListener('click', (e) => {
+
+                const target = e.target.closest(".similar-jokes"); // Or any other selector.
+
+                if (target && this.currentRoom === ContentType.PUNS_AND_JOKES) {
+                    this.getChatGptOpinion(CHAT_GPT_PROMPTS.SIMILAR_JOKE)
+                }
+
+            })
+        },
+        chatGptExplainQuote(){
+            this.vueAdvancedChatWebComponent.shadowRoot.querySelector('div.vac-messages-container').addEventListener('click', (e) => {
+
+                const target = e.target.closest(".dissect-quote"); // Or any other selector.
+
+                if (target && this.currentRoom === ContentType.QUOTES) {
+                    this.getChatGptOpinion(CHAT_GPT_PROMPTS.EXPLAIN_QUOTE)
+                }
+
+            })
+        },
+        chatGptSimilarQuote(){
+            this.vueAdvancedChatWebComponent.shadowRoot.querySelector('div.vac-messages-container').addEventListener('click', (e) => {
+
+                const target = e.target.closest(".similar-quotes"); // Or any other selector.
+
+                if (target && this.currentRoom === ContentType.QUOTES) {
+                    this.getChatGptOpinion(CHAT_GPT_PROMPTS.SIMILAR_QUOTES)
+                }
+
+            })
+        },
+        chatGptPoemThisJoke(){
+
+            this.vueAdvancedChatWebComponent.shadowRoot.querySelector('div.vac-messages-container').addEventListener('click', (e) => {
+
+                const target = e.target.closest(".poem-joke"); // Or any other selector.
+
+                if (target && this.currentRoom === ContentType.PUNS_AND_JOKES) {
+                    this.getChatGptOpinion(CHAT_GPT_PROMPTS.POEM_JOKE)
+                }
+
+            })
+        },
+        chatGptPoemThisQuote(){
+            this.vueAdvancedChatWebComponent.shadowRoot.querySelector('div.vac-messages-container').addEventListener('click', (e) => {
+
+                const target = e.target.closest(".poem-quote"); // Or any other selector.
+
+                if (target && this.currentRoom === ContentType.QUOTES) {
+                    this.getChatGptOpinion(CHAT_GPT_PROMPTS.POEM_QUOTE)
+                }
+
+            })
         }
 
     },
@@ -243,50 +349,14 @@ export default {
 
         this.vueAdvancedChatWebComponent = document.querySelector("vue-advanced-chat")
 
-        //fun facts check event listener
-        this.vueAdvancedChatWebComponent.shadowRoot.querySelector('div.vac-messages-container').addEventListener('click', (e) => {
-
-            const target = e.target.closest(".fact-check-query"); // Or any other selector.
-
-            if (target && this.currentRoom === ContentType.FUN_FACTS) {
-              this.getChatGptOpinion(CHAT_GPT_PROMPTS.FUN_FACT_CHECK)
-            }
-
-        })
-
-        //similar fun facts event listener
-        this.vueAdvancedChatWebComponent.shadowRoot.querySelector('div.vac-messages-container').addEventListener('click', (e) => {
-
-            const target = e.target.closest(".similar-facts-query"); // Or any other selector.
-
-            if (target && this.currentRoom === ContentType.FUN_FACTS) {
-                this.getChatGptOpinion(CHAT_GPT_PROMPTS.SIMILAR_FUN_FACT)
-            }
-
-        })
-
-
-        //dont get it event listener
-        this.vueAdvancedChatWebComponent.shadowRoot.querySelector('div.vac-messages-container').addEventListener('click', (e) => {
-
-            const target = e.target.closest(".dont-get-it"); // Or any other selector.
-
-            if (target && this.currentRoom === ContentType.PUNS_AND_JOKES) {
-                this.getChatGptOpinion(CHAT_GPT_PROMPTS.PUN_I_DONT_GET_IT)
-            }
-
-        })
-
-        this.vueAdvancedChatWebComponent.shadowRoot.querySelector('div.vac-messages-container').addEventListener('click', (e) => {
-
-            const target = e.target.closest(".similar-jokes"); // Or any other selector.
-
-            if (target && this.currentRoom === ContentType.PUNS_AND_JOKES) {
-                this.getChatGptOpinion(CHAT_GPT_PROMPTS.SIMILAR_JOKE)
-            }
-
-        })
-
+        this.chatGptFunFactCheck()
+        this.chatGptSimilarFunFact()
+        this.chatGptPunIDontGetIt()
+        this.chatGptSimilarJoke()
+        this.chatGptExplainQuote()
+        this.chatGptPoemThisQuote()
+        this.chatGptPoemThisJoke()
+        this.chatGptSimilarJoke()
 
         setTimeout(() => {
 
