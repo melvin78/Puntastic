@@ -79,7 +79,6 @@ export default {
 
     methods: {
         initChatGPT() {
-            console.log('executed inside chatgpt')
             const scrollContainerDiv = this.vueAdvancedChatWebComponent.shadowRoot.querySelector('div.vac-container-scroll')
 
             switch (this.currentRoom) {
@@ -243,7 +242,12 @@ export default {
                     this.roomsStore.removeTypingUsers(this.currentRoom)
 
 
-                });
+                }).catch(()=>{
+                    this.messagesStore.setMessages(formatChatGptMessage({
+                        _id : Math.random().toString(36).slice(2, 7),
+                        content: 'Really sorry 😥 am not able to give you a response right now. Kindly, try again later 🙂  ?'
+                    },this.currentRoom))
+                })
         },
 
         chatGptFunFactCheck(){
