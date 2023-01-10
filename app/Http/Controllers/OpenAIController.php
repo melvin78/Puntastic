@@ -56,6 +56,43 @@ class OpenAIController extends Controller
                     'max_tokens' => 500
                 ];
                 break;
+
+            case OpenAiChatContexts::EXPLAIN_QUOTE->Context():
+                $davinciResponse = [
+                    'model' => 'text-davinci-003',
+                    'prompt' => $validatedPromptRequest['Prompt'] . '.' . OpenAiChatPrompts::GetPrompts(OpenAiChatContexts::EXPLAIN_QUOTE->Context()),
+                    'temperature' => 0.8,
+                    'max_tokens' => 500
+                ];
+                break;
+
+            case OpenAiChatContexts::SIMILAR_QUOTES->Context():
+                $davinciResponse = [
+                    'model' => 'text-davinci-003',
+                    'prompt' => $validatedPromptRequest['Prompt'] . '.' . OpenAiChatPrompts::GetPrompts(OpenAiChatContexts::SIMILAR_QUOTES->Context()),
+                    'temperature' => 0.8,
+                    'max_tokens' => 500
+                ];
+                break;
+
+            case OpenAiChatContexts::POEM_JOKE->Context():
+                $davinciResponse = [
+                    'model' => 'text-davinci-003',
+                    'prompt' => $validatedPromptRequest['Prompt'] . '.' . OpenAiChatPrompts::GetPrompts(OpenAiChatContexts::POEM_JOKE->Context()),
+                    'temperature' => 0.8,
+                    'max_tokens' => 500
+                ];
+                break;
+
+            case OpenAiChatContexts::POEM_QUOTE->Context():
+                $davinciResponse = [
+                    'model' => 'text-davinci-003',
+                    'prompt' => $validatedPromptRequest['Prompt'] . '.' . OpenAiChatPrompts::GetPrompts(OpenAiChatContexts::POEM_QUOTE->Context()),
+                    'temperature' => 0.8,
+                    'max_tokens' => 500
+                ];
+                break;
+
         }
 
         $result = OpenAI::completions()->create($davinciResponse);
