@@ -38,6 +38,24 @@ class OpenAIController extends Controller
                     'max_tokens' => 500
                 ];
                 break;
+
+            case OpenAiChatContexts::PUN_I_DONT_GET_IT->Context():
+                $davinciResponse = [
+                    'model' => 'text-davinci-003',
+                    'prompt' => $validatedPromptRequest['Prompt'] . '.' . OpenAiChatPrompts::GetPrompts(OpenAiChatContexts::PUN_I_DONT_GET_IT->Context()),
+                    'temperature' => 0.8,
+                    'max_tokens' => 500
+                ];
+                break;
+
+            case OpenAiChatContexts::SIMILAR_JOKE->Context():
+                $davinciResponse = [
+                    'model' => 'text-davinci-003',
+                    'prompt' => $validatedPromptRequest['Prompt'] . '.' . OpenAiChatPrompts::GetPrompts(OpenAiChatContexts::SIMILAR_JOKE->Context()),
+                    'temperature' => 0.8,
+                    'max_tokens' => 500
+                ];
+                break;
         }
 
         $result = OpenAI::completions()->create($davinciResponse);

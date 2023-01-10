@@ -27,7 +27,7 @@
 
         <template v-if="showChatGPTIcon">
             <div slot="custom-action-icon">
-                <ChatGPTSvgIcon @init-chat-gpt="chatGPT"/>
+                <ChatGPTSvgIcon @init-chat-gpt="initChatGPT"/>
             </div>
         </template>
 
@@ -78,25 +78,48 @@ export default {
     },
 
     methods: {
-        chatGPT() {
-
+        initChatGPT() {
+            console.log('executed inside chatgpt')
             const scrollContainerDiv = this.vueAdvancedChatWebComponent.shadowRoot.querySelector('div.vac-container-scroll')
 
-            const chatGptTemplate = CHAT_GPT_TEMPLATES.FUN_FACTS
+            switch (this.currentRoom) {
 
-            setTimeout(() => {
+                case ContentType.FUN_FACTS:
 
-                const element = scrollContainerDiv
+                    setTimeout(() => {
 
-                element.classList.add('vac-scroll-smooth')
+                        scrollContainerDiv.classList.add('vac-scroll-smooth')
 
-                element.scrollTo({top: element.scrollHeight, behavior: 'smooth'})
+                        scrollContainerDiv.scrollTo({top: scrollContainerDiv.scrollHeight, behavior: 'smooth'})
 
-                setTimeout(() => element.classList.remove('vac-scroll-smooth'))
+                        setTimeout(() => scrollContainerDiv.classList.remove('vac-scroll-smooth'))
 
-            }, 50)
+                    }, 50)
 
-            this.vueAdvancedChatWebComponent.shadowRoot.querySelector('div.vac-messages-container span').insertAdjacentHTML('beforeend', chatGptTemplate)
+                    this.vueAdvancedChatWebComponent.shadowRoot.querySelector('div.vac-messages-container span').insertAdjacentHTML('beforeend', CHAT_GPT_TEMPLATES.FUN_FACTS)
+
+                    break;
+
+                case ContentType.PUNS_AND_JOKES:
+
+                    setTimeout(() => {
+
+                        scrollContainerDiv.classList.add('vac-scroll-smooth')
+
+                        scrollContainerDiv.scrollTo({top: scrollContainerDiv.scrollHeight, behavior: 'smooth'})
+
+                        setTimeout(() => scrollContainerDiv.classList.remove('vac-scroll-smooth'))
+
+                    }, 50)
+
+                    this.vueAdvancedChatWebComponent.shadowRoot.querySelector('div.vac-messages-container span').insertAdjacentHTML('beforeend', CHAT_GPT_TEMPLATES.PUNS_AND_JOKES)
+
+                    break;
+
+            }
+
+
+
         },
 
         sendMessage({content, roomId, files, replyMessage}) {
@@ -214,7 +237,7 @@ export default {
 
         this.messagesLoaded = false
 
-        this.messages = this.messagesStore.getMessages.filter(x => x.roomId === ContentType.PUNS);
+        this.messages = this.messagesStore.getMessages.filter(x => x.roomId === ContentType.PUNS_AND_JOKES);
 
         this.rooms = this.roomsStore.getRooms;
 
@@ -241,6 +264,29 @@ export default {
             }
 
         })
+
+
+        //dont get it event listener
+        this.vueAdvancedChatWebComponent.shadowRoot.querySelector('div.vac-messages-container').addEventListener('click', (e) => {
+
+            const target = e.target.closest(".dont-get-it"); // Or any other selector.
+
+            if (target && this.currentRoom === ContentType.PUNS_AND_JOKES) {
+                this.getChatGptOpinion(CHAT_GPT_PROMPTS.PUN_I_DONT_GET_IT)
+            }
+
+        })
+
+        this.vueAdvancedChatWebComponent.shadowRoot.querySelector('div.vac-messages-container').addEventListener('click', (e) => {
+
+            const target = e.target.closest(".similar-jokes"); // Or any other selector.
+
+            if (target && this.currentRoom === ContentType.PUNS_AND_JOKES) {
+                this.getChatGptOpinion(CHAT_GPT_PROMPTS.SIMILAR_JOKE)
+            }
+
+        })
+
 
         setTimeout(() => {
 

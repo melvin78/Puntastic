@@ -18,7 +18,7 @@ export function formatServerMessage(messageFromServer, roomId){
         avatarValue = "/images/quote.png"
     }
 
-    if(roomId === ContentType.PUNS){
+    if(roomId === ContentType.PUNS_AND_JOKES){
 
         avatarValue = "/images/cooking.png"
     }

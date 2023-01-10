@@ -1,5 +1,5 @@
 export const ContentType = {
-    PUNS: '1',
+    PUNS_AND_JOKES: '1',
     FUN_FACTS: '2',
     THREE_AM_JOKES: '3',
     QUOTES: '4',

@@ -29,6 +29,35 @@ export const CHAT_GPT_TEMPLATES = {
       <div class="vac-avatar vac-avatar-current" style="background-image: url(&quot;/images/chatgpt.png&quot;);"></div>
       <!----></div>
   </div>
+</div>`,
+
+    PUNS_AND_JOKES: `<div class="">
+  <div class="vac-message-wrapper" style="cursor: pointer">
+    <!----><!---->
+    <div class="vac-message-box vac-offset-current chat-gpt-message-box"
+         style="display: flex;flex-direction: column;"><!----><!---->
+      <div style="padding: 1px 1px;min-width: 25px;" class="vac-message-container vac-message-container-offset"><span>Choose an option:</span>
+      </div>
+      <div style="padding: 1px 1px;min-width: 25px;" class="vac-message-container vac-message-container-offset dont-get-it">
+      <div class="vac-format-message-wrapper">
+      <div class="vac-format-container">
+         <div class="vac-message-card vac-message-current " style="background-color: rgba(255, 255, 240, 0.11) !important;"><!----><!---->
+          <span style="display: flex; justify-content: center; text-align: center"><span>I dont get it 😕</span></span>
+
+        </div>
+        <span></span></div>
+     </div>
+      </div>
+
+      <div style="padding: 1px 1px;min-width: 25px;" class="vac-message-container vac-message-container-offset similar-jokes">
+        <div style="background-color: rgba(255, 255, 240, 0.11) !important;" class="vac-message-card vac-message-current  "><!----><!---->
+         <span style="display: flex; justify-content: center; text-align: center"><span>Similar Joke 😝</span></span>
+
+        </div>
+        <span></span></div><!---->
+      <div class="vac-avatar vac-avatar-current" style="background-image: url(&quot;/images/chatgpt.png&quot;);"></div>
+      <!----></div>
+  </div>
 </div>`
 
 }
@@ -259,6 +288,8 @@ export const ROOM_TEMPLATES =  [
 export const CHAT_GPT_PROMPTS = {
     FUN_FACT_CHECK:1,
     SIMILAR_FUN_FACT:2,
+    PUN_I_DONT_GET_IT : 3,
+    SIMILAR_JOKE : 4
 }
 
 

@@ -33,6 +33,23 @@ class OpenAiChatPrompts
             ]);
         }
 
+        else if ($chatContext === OpenAiChatContexts::PUN_I_DONT_GET_IT->Context()){
+            $prompt = new Collection([
+                'this pun has completely gone over my head please help.',
+                'explain this pun like am 10 years old.',
+                'someone told me this and i am struggling to understand it. How best can you explain it',
+                'please explain this joke to me.',
+            ]);
+        }
+
+        else if ($chatContext === OpenAiChatContexts::SIMILAR_JOKE->Context()){
+            $prompt = new Collection([
+                'what other puns/jokes do you have for me similar to this one. You can use emojis to show expression',
+                'what other punchlines similar to this do you have',
+                'come up with other puns/jokes like this one. Get creative with it.',
+            ]);
+        }
+
         return $prompt->random();
     }
 }

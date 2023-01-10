@@ -37,7 +37,7 @@ export const useMessagesStore = defineStore('messages-store', {
             }
 
             switch (roomId) {
-                case ContentType.PUNS:
+                case ContentType.PUNS_AND_JOKES:
                     remove?
                         this.messages.map((val, obj) => {
 
@@ -171,7 +171,7 @@ export const useMessagesStore = defineStore('messages-store', {
         },
         async getContentMessage(roomId, messageNumber) {
             switch (roomId) {
-                case ContentType.PUNS:
+                case ContentType.PUNS_AND_JOKES:
                     await fetch(`/api/puns/${messageNumber}`)
                         .then((response) => response.json())
                         .then(
