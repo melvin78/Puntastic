@@ -97,6 +97,9 @@ COPY ./.deploy/entrypoint.sh /
 # copy supervisor configuration
 COPY ./.deploy/config/supervisor.conf /etc/supervisord.conf
 
+#
+RUN NPM RUN BUILD
+
 EXPOSE 80
 # run supervisor
 CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]
