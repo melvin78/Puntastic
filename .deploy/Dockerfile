@@ -98,7 +98,7 @@ COPY ./.deploy/entrypoint.sh /
 COPY ./.deploy/config/supervisor.conf /etc/supervisord.conf
 
 #
-RUN NPM RUN BUILD
+RUN npm run build
 
 EXPOSE 80
 # run supervisor
