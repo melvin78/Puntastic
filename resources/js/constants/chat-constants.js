@@ -149,7 +149,7 @@ export const  DEFAULT_SYSTEM_MESSAGES = [
     {
         _id: '7890',
         indexId: 12092,
-        content: 'Pun absolutely intended ....* badam tiss * 🥁 ',
+        content: 'Pun absolutely intended ....* badam tiss * 🥁. Input random number between 1 and 50 ',
         senderId: '4321',
         username: 'John Doe',
         avatar: '/images/cooking.png',
@@ -169,7 +169,7 @@ export const  DEFAULT_SYSTEM_MESSAGES = [
     {
         _id: '78913',
         indexId: 120922,
-        content: 'Some cool fun facts 💡 you might never heard of.',
+        content: 'Some cool fun facts 💡 you might never heard of. Input random number between 1 and 50',
         senderId: '4321',
         username: 'John Doe',
         avatar: '/images/fun-fact.png',
@@ -189,7 +189,7 @@ export const  DEFAULT_SYSTEM_MESSAGES = [
     {
         _id: '78113',
         indexId: 1230922,
-        content: "Jokes So bad they shouldn't be seeing the light of day 😁.",
+        content: "Jokes So bad they shouldn't be seeing the light of day 😁. Input random number between 1 and 50",
         senderId: '4321',
         username: 'John Doe',
         avatar: '/images/joking.png',
@@ -209,7 +209,7 @@ export const  DEFAULT_SYSTEM_MESSAGES = [
     {
         _id: '78213',
         indexId: 12312,
-        content: "Motivational,inspirational and famous quotes to brighten your day.🧘‍",
+        content: "Motivational,inspirational and famous quotes to brighten your day.🧘 Input random number between 1 and 50",
         senderId: '4321',
         username: 'John Doe',
         avatar: '/images/quote.png',

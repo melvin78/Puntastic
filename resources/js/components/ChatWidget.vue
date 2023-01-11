@@ -3,7 +3,7 @@
         ref="advancedChat"
         :current-user-id="currentUserId"
         :text-messages="JSON.stringify(textMessages)"
-        :height="'500px'"
+        :height="chatWindowHeight"
         :theme="'dark'"
         :show-audio="false"
         :show-search="false"
@@ -72,7 +72,8 @@ export default {
             textMessages: TEXT_MESSAGES,
             options: {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'},
             rooms: [],
-            vueAdvancedChatWebComponent: null
+            vueAdvancedChatWebComponent: null,
+            chatWindowHeight:''
 
         }
     },
@@ -392,6 +393,8 @@ export default {
     },
 
     created() {
+
+        this.chatWindowHeight = `${window.innerHeight}px`
 
         if (!window.sessionStorage.getItem('web-melvin-chat-app')) {
 
