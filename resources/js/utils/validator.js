@@ -1,6 +1,6 @@
-export function IsValidNumberBetweenOneAndHundred(val){
+export function IsValidNumberBetweenOneAndFifty(val){
 
-    const regex = new RegExp("^[1-9][0-9]?$|^100$");
+    const regex = new RegExp("^([1-9]|[1-4][0-9]|50)$");
 
     return regex.test(val)
 }

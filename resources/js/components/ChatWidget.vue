@@ -37,7 +37,7 @@
 <script>
 import {register} from 'vue-advanced-chat'
 import {parseTimestamp} from "@/utils/dates";
-import {generateRandomString, IsValidNumberBetweenOneAndHundred} from "@/utils/validator";
+import {generateRandomString, IsValidNumberBetweenOneAndFifty} from "@/utils/validator";
 import {useMessagesStore} from "@/pinia/messages-store";
 import {useRoomsStore} from "@/pinia/rooms-store";
 import ChatGPTSvgIcon from "@/components/ChatGPTSvgIcon.vue";
@@ -140,7 +140,7 @@ export default {
         sendMessage({content, roomId, files, replyMessage}) {
 
 
-            if (IsValidNumberBetweenOneAndHundred(content)) {
+            if (IsValidNumberBetweenOneAndFifty(content)) {
                 this.showChatGPTIcon = true
 
                 this.chatGptActivated = false
@@ -204,7 +204,7 @@ export default {
         },
         typingMessage({roomId, message}) {
 
-            this.showSendIcon = IsValidNumberBetweenOneAndHundred(message)
+            this.showSendIcon = IsValidNumberBetweenOneAndFifty(message)
 
         },
 
@@ -219,6 +219,8 @@ export default {
 
             this.roomsStore.updateTypingUsers(this.currentRoom)
 
+            let responseObject, responseData;
+
             await fetch(`/api/chat-gpt`,
                 {
                     method: 'POST',
@@ -230,22 +232,39 @@ export default {
                     body: JSON.stringify(promptRequest),
                 },
             )
-                .then((response) => response.json())
+                .then((response) =>{
+                    responseObject = response
+                    return response.json()
+                })
                 .then((data) => {
 
-                    const chatGptAnswer = formatChatGptMessage(data,this.currentRoom)
+                    if (responseObject.ok){
+                        const chatGptAnswer = formatChatGptMessage(data,this.currentRoom)
 
-                    this.messagesStore.setMessages(chatGptAnswer)
+                        this.messagesStore.setMessages(chatGptAnswer)
 
-                    this.messages = this.messagesStore.getMessages.filter(x => x.roomId === this.currentRoom)
+                        this.messages = this.messagesStore.getMessages.filter(x => x.roomId === this.currentRoom)
 
-                    this.roomsStore.removeTypingUsers(this.currentRoom)
+                        this.roomsStore.removeTypingUsers(this.currentRoom)
+                    }
+                    else{
+                        this.messagesStore.setMessages(formatChatGptMessage({
+                            _id : Math.random().toString(36).slice(2, 7),
+                            content: 'Really sorry 😥 am not able to give you a response right now. Kindly, try again later 🙂'
+                        },this.currentRoom))
+
+                        this.messages = this.messagesStore.getMessages.filter(x => x.roomId === this.currentRoom)
+
+                        this.roomsStore.removeTypingUsers(this.currentRoom)
+                    }
 
 
-                }).catch(()=>{
+                })
+                .catch(()=>{
+
                     this.messagesStore.setMessages(formatChatGptMessage({
                         _id : Math.random().toString(36).slice(2, 7),
-                        content: 'Really sorry 😥 am not able to give you a response right now. Kindly, try again later 🙂  ?'
+                        content: 'Really sorry 😥 am not able to give you a response right now. Kindly, try again later 🙂'
                     },this.currentRoom))
                 })
         },
@@ -361,6 +380,7 @@ export default {
         this.chatGptPoemThisQuote()
         this.chatGptPoemThisJoke()
         this.chatGptSimilarJoke()
+        this.chatGptSimilarQuote()
 
         setTimeout(() => {
 
