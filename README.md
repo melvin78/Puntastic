@@ -1,66 +1,102 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/melvin78/Puntastic/master/blob/chat.png" width="400" alt="Puntastic Logo"></a></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
 
-## About Laravel
+## Puntastic
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+This is a ChatBot 🤖 that gives you responses based on three chat contexts, fun facts 💡, quotes ✍ and Puns/Jokes🙂. Responses are given
+after keying a random value between 1 and 50.
+With the help of [Open AI's Chat GPT](https://openai.com/blog/chatgpt/) , this default responses are then passed as prompts to the Davinci-003 Model based
+on options chosen i.e explain this joke, Poem the joke, fact check a fun fact, retrieve similar quotes, explain the quote e.t.c.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Demo 🚀
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Be sure to check out the [Live Demo](https://chat-bot.webmelvin.me) 
 
-## Learning Laravel
+## Preview 🌟
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Credit for the design of the chat component goes to [vue-advanced-chat](https://github.com/antoine92190/vue-advanced-chat). A simple web chat component that works with most frontend frameworks
+and not only vue, i.e react,angular, svelte.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+<img src="https://raw.githubusercontent.com/melvin78/Puntastic/master/blob/fun-fact.png" width="400" alt="Puntastic Logo">
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+<img src="https://raw.githubusercontent.com/melvin78/Puntastic/master/blob/pun-joke.png" width="400" alt="Puntastic Logo">
 
-## Laravel Sponsors
+<img src="https://raw.githubusercontent.com/melvin78/Puntastic/master/blob/quotes.png" width="400" alt="Puntastic Logo">
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+## Features and architecture
+
+The project has three parts the data source, front-end and back end. The frontend and backend are monolithic
+and not in different repositories.
+
+- Data Source: [MongoDB](https://github.com/mongodb/mongo) - Responsible for storing all the quotes,jokes and fun facts collections. Each document has a unique number between 
+  and 50 that will be used as the index when retrieving a document.
+  <p>It also holds emoji reactions for each message for each user for each room.
+  </p>
+- Back-end: [Laravel](https://github.com/laravel/laravel) - Responsible for retrieving message information
+  from the data source , transform and package it to be consumed in the frontend. 
+  This is where prompt messages are passed to the [DaVinci Model](https://beta.openai.com/docs/models/gpt-3)
+- Front-End: [Vue 3](https://github.com/vuejs/vue), [Tailwind](https://github.com/tailwindlabs/tailwindcss), [Vite](https://github.com/vitejs/vite) - Tailwind for styling, vite as the bundler and vue at the core
+  for displaying chat components,sending and receiving messages e.t.c. 
+ 
+
+## Installation
+
+### Requirements
+- PHP Version 8 or later,
+- Node JS 
+- MongoDB Instance
+- PHP Composer
+
+### Procedure
+  
+First acquire an api key from [Open Ai](https://openai.com/) this key will be used everytime you make a request to the model. Keep it safe.
+
+Create a .env in the root project directory if it doesn't exist and add this 
+
+```
+OPENAI_API_KEY = YOUR_SUPER_SECRET_OPEN_AI_KEY
+```
+
+Check and confirm that the db environment variables point to your MONGO_DB instance. Ideally in the .env it should be similar to something like this.
+```
+DB_CONNECTION=mongodb
+DB_URI=127.0.0.1
+DB_PORT=27017
+DB_DATABASE=puntastic
+DB_USERNAME=
+DB_PASSWORD=
+```
+
+Afterwards update and install the laravel dependencies requires with the help of composer. Ensure you have composer installed then run this in the terminal of the project's root directory
+```bash
+ $ composer update
+ 
+ $ composer install
+```
+
+If everything runs okay without any errors you can proceed and
+run migrations, but before that ensure you created a database called 'puntastic' in your mongoDB instance. After that is done you can run this
+```bash
+ $ php artisan migrate
+```
+If this was successful you will see the collections(fun_facts,quotes and puns and jokes) added to the database you just created.
+
+Also install the frontend dependencies and start the vite dev server that will ensure hot reloads
+of changes you make to the assets
+
+```bash
+ $ npm install
+ 
+ $ npm run dev
+```
+
 
 ## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Thank you for considering contributing to the project, feel free to open a pull request.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The project is open-sourced and under the [MIT license](https://opensource.org/licenses/MIT).
