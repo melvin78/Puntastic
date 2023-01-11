@@ -2,7 +2,7 @@ ARG PHP_VERSION=${PHP_VERSION:-8.1.3}
 FROM php:${PHP_VERSION}-fpm-alpine AS php-system-setup
 
 # Install system dependencies
-RUN apk add --no-cache dcron busybox-suid libcap curl zip unzip git supervisor nodejs npm
+RUN apk add --no-cache dcron busybox-suid libcap curl zip unzip git supervisor nodejs npm nano
 
 # Install PHP extensions
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/
