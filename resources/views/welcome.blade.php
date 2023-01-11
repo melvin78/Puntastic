@@ -393,10 +393,9 @@
     </style>
 </head>
 <body style="">
-<div class="text-center mb-20">
-    <h1 class="sm:text-3xl text-3xl font-medium text-center title-font  mb-2" style="color: wheat;">Puntastic Hub</h1>
+<div class="text-center mb-5">
 </div>
-<div id="app" class="max-w-6xl mx-auto sm:px-6 lg:px-8">
+<div id="app" class="max-w-6xl mx-auto sm:px-6 lg:px-8 mt-2">
 </div>
 @vite('resources/js/app.js')
 </body>
