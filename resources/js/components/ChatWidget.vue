@@ -394,7 +394,7 @@ export default {
 
     created() {
 
-        this.chatWindowHeight = `${window.innerHeight}px`
+        this.chatWindowHeight = `${window.innerHeight - 80 }px`
 
         if (!window.sessionStorage.getItem('web-melvin-chat-app')) {
 
