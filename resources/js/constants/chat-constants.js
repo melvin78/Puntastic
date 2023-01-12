@@ -137,6 +137,15 @@ export const  CHAT_STYLES = {
 
 }
 
+export const ROOM_ACTIONS = [
+
+        {
+            name: 'github',
+            title: 'View Source Code'
+        },
+
+]
+
 export const TEXT_MESSAGES = {
 
     TYPE_MESSAGE: 'Input random number between 1 and 50',

@@ -4,6 +4,7 @@
         :current-user-id="currentUserId"
         :text-messages="JSON.stringify(textMessages)"
         :height="chatWindowHeight"
+        :menu-actions="JSON.stringify(roomActions)"
         :theme="'dark'"
         :show-audio="false"
         :show-search="false"
@@ -22,6 +23,7 @@
         @fetch-messages="fetchMessages($event.detail[0])"
         @typing-message="typingMessage($event.detail[0])"
         @send-message="sendMessage($event.detail[0])"
+        @menu-action-handler="handleMenuAction($event.detail[0])"
         textarea-action-enabled="true"
     >
 
@@ -41,7 +43,7 @@ import {generateRandomString, IsValidNumberBetweenOneAndFifty} from "@/utils/val
 import {useMessagesStore} from "@/pinia/messages-store";
 import {useRoomsStore} from "@/pinia/rooms-store";
 import ChatGPTSvgIcon from "@/components/ChatGPTSvgIcon.vue";
-import {CHAT_GPT_PROMPTS, CHAT_GPT_TEMPLATES, CHAT_STYLES, TEXT_MESSAGES} from "@/constants/chat-constants";
+import {CHAT_GPT_PROMPTS, CHAT_GPT_TEMPLATES, CHAT_STYLES, TEXT_MESSAGES,ROOM_ACTIONS} from "@/constants/chat-constants";
 import {ContentType, USERS} from "@/constants/code-constants";
 import {formatChatGptMessage} from "@/utils/modify-message";
 
@@ -61,6 +63,7 @@ export default {
             messages: [],
             currentRoom: '',
             currentUserId: USERS.HUMAN_USER,
+            roomActions: ROOM_ACTIONS,
             socketId: '',
             chatGptActivated: false,
             showSendIcon: false,
@@ -188,8 +191,9 @@ export default {
 
             this.currentRoom = room.roomId
 
-            this.messages = this.messagesStore.getMessages.filter(x => x.roomId === room.roomId)
+            this.showChatGPTIcon = this.messagesStore.getMessages.filter(x=> x.roomId === room.roomId).length > 1
 
+            this.messages = this.messagesStore.getMessages.filter(x => x.roomId === room.roomId)
 
             setTimeout(() => {
                 this.messagesLoaded = true
@@ -268,6 +272,14 @@ export default {
                         content: 'Really sorry 😥 am not able to give you a response right now. Kindly, try again later 🙂'
                     },this.currentRoom))
                 })
+        },
+
+        handleMenuAction({ roomId, action }){
+
+            switch (action.name){
+                case 'github':
+                    window.location.href = "https://github.com/melvin78/Puntastic"
+            }
         },
 
         chatGptFunFactCheck(){
