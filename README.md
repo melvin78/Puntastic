@@ -48,6 +48,7 @@ and not in different repositories.
 - Node JS 
 - MongoDB Instance
 - PHP Composer
+- Laravel
 
 ### Procedure
   
@@ -59,7 +60,7 @@ Create a .env in the root project directory if it doesn't exist and add this
 OPENAI_API_KEY = YOUR_SUPER_SECRET_OPEN_AI_KEY
 ```
 
-Check and confirm that the db environment variables point to your MONGO_DB instance. Ideally in the .env it should be similar to something like this.
+Check and confirm that the db environment variables point to your MONGO_DB instance. Ideally in the .env it should be something like this.
 ```
 DB_CONNECTION=mongodb
 DB_URI=127.0.0.1
@@ -69,7 +70,7 @@ DB_USERNAME=
 DB_PASSWORD=
 ```
 
-Afterwards update and install the laravel dependencies requires with the help of composer. Ensure you have composer installed then run this in the terminal of the project's root directory
+Afterwards update and install the laravel dependencies required with the help of composer. Ensure you have composer installed then run this in the terminal of the project's root directory
 ```bash
  $ composer update
  
@@ -104,6 +105,13 @@ Install frontend dependencies and start the vite dev server for hot reloads when
  $  npm run dev
    
 ```
+
+Finally start the backend server in a different terminal process by running
+```bash
+ $  php artisan serve   
+   
+```
+The project should now be running on port 8000 .
 
 
 ## Contributing
