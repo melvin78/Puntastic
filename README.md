@@ -97,9 +97,13 @@ your database with the default responses by running the following commands:
 ```
 
 
-Also install the frontend dependencies and start the vite dev server that will ensure hot reloads
-of changes you make to the assets
-
+Install frontend dependencies and start the vite dev server for hot reloads when you make a changes
+```bash
+ $  npm install    
+ 
+ $  npm run dev
+   
+```
 
 
 ## Contributing
