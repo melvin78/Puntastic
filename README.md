@@ -81,15 +81,21 @@ run migrations, but before that ensure you created a database called 'puntastic'
 ```bash
  $ php artisan migrate
 ```
-If this was successful you will see the collections(fun_facts,quotes and puns and jokes) added to the database you just created.
+If this was successful you will see the collections(fun_facts,quotes and puns and jokes) added to the database you just created. You can seed 
+the database with the default responses by running the following commands:
+```bash
+ $ php artisan migrate
+```
 
 Also install the frontend dependencies and start the vite dev server that will ensure hot reloads
 of changes you make to the assets
 
 ```bash
- $ npm install
+ $  php artisan db:seed --class=QuotesSeeder    
  
- $ npm run dev
+ $  php artisan db:seed --class=PunsSeeder 
+ 
+ $ php artisan db:seed --class=FunFactsSeeder    
 ```
 
 
