@@ -17,6 +17,6 @@
         "laravel-echo": "^1.14.1",
         "pinia": "^2.0.23",
         "pusher-js": "^7.4.0",
-        "vue-advanced-chat": "https://github.com/antoine92190/vue-advanced-chat/tarball/master"
+        "vue-advanced-chat": "latest"
     }
 }
