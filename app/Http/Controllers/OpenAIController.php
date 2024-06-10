@@ -23,7 +23,7 @@ class OpenAIController extends Controller
         switch ($validatedPromptRequest['Context']) {
             case OpenAiChatContexts::FUN_FACT_CHECK->Context():
                 $davinciResponse = [
-                    'model' => 'text-davinci-003',
+                    'model' => 'gpt-3.5-turbo-instruct',
                     'prompt' => $validatedPromptRequest['Prompt'] . '.' . OpenAiChatPrompts::GetPrompts(OpenAiChatContexts::FUN_FACT_CHECK->Context()),
                     'temperature' => 0.8,
                     'max_tokens' => 500
@@ -32,7 +32,7 @@ class OpenAIController extends Controller
 
             case OpenAiChatContexts::SIMILAR_FUN_FACT->Context():
                 $davinciResponse = [
-                    'model' => 'text-davinci-003',
+                    'model' => 'gpt-3.5-turbo-instruct',
                     'prompt' => $validatedPromptRequest['Prompt'] . '.' . OpenAiChatPrompts::GetPrompts(OpenAiChatContexts::SIMILAR_FUN_FACT->Context()),
                     'temperature' => 0.8,
                     'max_tokens' => 500
@@ -41,7 +41,7 @@ class OpenAIController extends Controller
 
             case OpenAiChatContexts::PUN_I_DONT_GET_IT->Context():
                 $davinciResponse = [
-                    'model' => 'text-davinci-003',
+                    'model' => 'gpt-3.5-turbo-instruct',
                     'prompt' => $validatedPromptRequest['Prompt'] . '.' . OpenAiChatPrompts::GetPrompts(OpenAiChatContexts::PUN_I_DONT_GET_IT->Context()),
                     'temperature' => 0.8,
                     'max_tokens' => 500
@@ -50,7 +50,7 @@ class OpenAIController extends Controller
 
             case OpenAiChatContexts::SIMILAR_JOKE->Context():
                 $davinciResponse = [
-                    'model' => 'text-davinci-003',
+                    'model' => 'gpt-3.5-turbo-instruct',
                     'prompt' => $validatedPromptRequest['Prompt'] . '.' . OpenAiChatPrompts::GetPrompts(OpenAiChatContexts::SIMILAR_JOKE->Context()),
                     'temperature' => 0.8,
                     'max_tokens' => 500
@@ -59,7 +59,7 @@ class OpenAIController extends Controller
 
             case OpenAiChatContexts::EXPLAIN_QUOTE->Context():
                 $davinciResponse = [
-                    'model' => 'text-davinci-003',
+                    'model' => 'gpt-3.5-turbo-instruct',
                     'prompt' => $validatedPromptRequest['Prompt'] . '.' . OpenAiChatPrompts::GetPrompts(OpenAiChatContexts::EXPLAIN_QUOTE->Context()),
                     'temperature' => 0.8,
                     'max_tokens' => 500
@@ -68,7 +68,7 @@ class OpenAIController extends Controller
 
             case OpenAiChatContexts::SIMILAR_QUOTES->Context():
                 $davinciResponse = [
-                    'model' => 'text-davinci-003',
+                    'model' => 'gpt-3.5-turbo-instruct',
                     'prompt' => $validatedPromptRequest['Prompt'] . '.' . OpenAiChatPrompts::GetPrompts(OpenAiChatContexts::SIMILAR_QUOTES->Context()),
                     'temperature' => 0.8,
                     'max_tokens' => 500
@@ -77,7 +77,7 @@ class OpenAIController extends Controller
 
             case OpenAiChatContexts::POEM_JOKE->Context():
                 $davinciResponse = [
-                    'model' => 'text-davinci-003',
+                    'model' => 'gpt-3.5-turbo-instruct',
                     'prompt' => $validatedPromptRequest['Prompt'] . '.' . OpenAiChatPrompts::GetPrompts(OpenAiChatContexts::POEM_JOKE->Context()),
                     'temperature' => 0.8,
                     'max_tokens' => 500
@@ -86,7 +86,7 @@ class OpenAIController extends Controller
 
             case OpenAiChatContexts::POEM_QUOTE->Context():
                 $davinciResponse = [
-                    'model' => 'text-davinci-003',
+                    'model' => 'gpt-3.5-turbo-instruct',
                     'prompt' => $validatedPromptRequest['Prompt'] . '.' . OpenAiChatPrompts::GetPrompts(OpenAiChatContexts::POEM_QUOTE->Context()),
                     'temperature' => 0.8,
                     'max_tokens' => 500
